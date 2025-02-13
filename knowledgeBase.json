@@ -1,19 +1,11 @@
-  // ========================================================
-  // Base de Conhecimento Interna (knowledgeBase)
-  // ========================================================
-  // (ATENÇÃO: A estrutura abaixo contém diversas declarações de variáveis e arrays referentes a diferentes áreas.
-  // Caso sua intenção seja utilizar uma única base de conhecimento para o chatbot, certifique-se de que as informações
-  // estejam consolidadas na variável "knowledgeBase".)
-
-  const apresentacao = {
+[
+{
   id: "apresentacao",
   title: "Apresentação",
   url: "https://helpsinge.lince.com.br/apresentacao.html?ms=AAAAAAAAAAAAAAA%3D&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
   content: "Esta página de apresentação oferece uma visão geral do sistema HelpSinge, detalhando seus objetivos, funcionalidades e a proposta de valor do projeto. Serve como uma introdução para novos usuários, explicando como o sistema pode contribuir para a gestão e o suporte de processos, além de destacar os principais recursos e benefícios do uso da plataforma."
-};
-
-const arquiteturaDoSinge = [
-  {
+},
+{
   id: "arquitetura-do-singe",
   title: "Arquitetura do Singe",
   url: "https://helpsinge.lince.com.br/arquitetura_singe.html?ms=AAAAAAAAAAAAAAA%3D&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
@@ -31,9 +23,6 @@ const arquiteturaDoSinge = [
   url: "https://helpsinge.lince.com.br/configuracoes_minimas.html?ms=AQAAAAAAAAAAAAAE&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
   content: "Esta página descreve as configurações mínimas necessárias para a implementação do HelpSinge, informando os requisitos técnicos e as especificações básicas que garantem o desempenho adequado e a segurança do sistema."
     },
-];
-
-const lgpd = [
   {
   id: "lgpd",
   title: "LGPD",
@@ -46,9 +35,6 @@ const lgpd = [
   url: "https://helpsinge.lince.com.br/lgpd___lei_geral_de_protecao_de_dados_pessoais__lgpd___lei_n__13_709_2018.html?ms=AwAAAAAAAAAAAAAEAQ%3D%3D&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
   content: "Nesta página é detalhada a Lei Geral de Proteção de Dados Pessoais (LGPD), Lei nº 13.709/2018, com informações sobre seus principais dispositivos, obrigações e orientações para garantir o tratamento seguro e ético dos dados pessoais no âmbito do HelpSinge."
     },
-];
-
-const modulos = [
   {
   id: "modulos",
   title: "Módulos",
@@ -61,9 +47,6 @@ const modulos = [
   url: "https://helpsinge.lince.com.br/modulos.html?ms=AwAAAAAAAAAAAAAMAQ%3D%3D&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
   content: "Nesta página são detalhados os módulos do HelpSinge, fornecendo uma visão geral das funcionalidades e dos componentes que compõem o sistema. O conteúdo facilita a compreensão dos diferentes blocos operacionais, permitindo aos usuários identificar e navegar entre as diversas áreas de aplicação."
     },
-];
-
-const producao = [
   {
     id: "gestao_da_producao",
     title: "Gestão da Produção",
@@ -357,10 +340,7 @@ const producao = [
     title: "Preparação de Matéria Prima",
     url: "https://helpsinge.lince.com.br/preparacao_de_materia_prima_.html?ms=EwAAABAAAAAAAAAMAwII&st=MA%3D%3D&sct=MjI3&mw=MzAw",
     content: "Esta página descreve os procedimentos para a preparação da matéria-prima, assegurando que os insumos estejam adequadamente processados e dentro dos padrões de qualidade antes do uso na produção."
-  }
-];
-
-const qualidade = [
+  },
   {
     id: "gestao_da_qualidade",
     title: "Gestão da Qualidade",
@@ -408,10 +388,7 @@ const qualidade = [
     title: "Relatório de Não Conformidades 2",
     url: "https://helpsinge.lince.com.br/relatorio_de_nao_conformidades_2.html?ms=EwAAACAAAAAAAAAMBQgE&st=MA%3D%3D&sct=MTAw&mw=MzAw",
     content: "Esta página fornece um segundo relatório de não conformidades, focando em aspectos críticos e técnicos que impactam a qualidade, para auxiliar na identificação e correção de falhas nos processos."
-  }
-];
-
-const logistica = [
+  },
   {
     id: "transporte_logistica",
     title: "Transporte e Logística",
@@ -777,12 +754,7 @@ const logistica = [
     title: "Entrada das Devoluções",
     url: "https://helpsinge.lince.com.br/entrada_das_devolucoes.html?ms=cwAAAAADAAAAAAAMCSABYAE4&st=MA%3D%3D&sct=Mjg3NQ%3D%3D&mw=MzAw",
     content: "Nesta página são registradas as entradas das devoluções, integrando os dados de retorno de produtos ao sistema de controle de estoque."
-  }
-  // A lista continua – inclua os demais itens conforme o conjunto de URLs fornecido.
-];
-
-
-const financeiro = [
+  },
   {
     id: "financeiro_home",
     title: "Financeiro",
@@ -1040,10 +1012,7 @@ const financeiro = [
     title: "Plasticos (Financeiro) - 2",
     url: "https://helpsinge.lince.com.br/plasticos_.html?ms=AxQAAAAMAAAAAAAMEQQBYAE%3D&st=MA%3D%3D&sct=MTM2Nw%3D%3D&mw=MzAw",
     content: "Repetição da página de controle dos materiais plásticos, garantindo a consistência e a disponibilidade dos dados para análises financeiras."
-  }
-];
-
-const contabilidade = [
+  },
   {
     id: "contabilidade_home",
     title: "Contabilidade",
@@ -1355,10 +1324,7 @@ const contabilidade = [
     title: "Participação em Coligadas/Controladas",
     url: "https://helpsinge.lince.com.br/participacao_em_coligadas_controladas_.html?ms=A3ADAAAAAAAAAAAIIBgBCEQF&st=MA%3D%3D&sct=MTYwMw%3D%3D&mw=MzAw",
     content: "Apresenta informações sobre a participação da empresa em coligadas e controladas, com dados relevantes para análise de investimentos e estrutura societária."
-  }
-];
-
-const custos = [
+  },
   {
     id: "custos_home",
     title: "Custos",
@@ -1448,10 +1414,7 @@ const custos = [
     title: "Valores para Custos",
     url: "https://helpsinge.lince.com.br/valores_para_custos.html?ms=AwACAABAAEAAAAAIQAgQCA%3D%3D&st=MA%3D%3D&sct=MTQ4&mw=MzAw",
     content: "Fornece os valores base que alimentam os cálculos de custos, essenciais para a elaboração de orçamentos e para o monitoramento financeiro."
-  }
-];
-
-const suprimentos = [
+  },
   {
     id: "suprimentos_home",
     title: "Suprimentos",
@@ -1745,10 +1708,7 @@ const suprimentos = [
     title: "Relatório – Posição de Estoque",
     url: "https://helpsinge.lince.com.br/relatorio___posicao_de_estoque.html?ms=BQBkAAAAAAAAAAAIAUBEQA%3D%3D&st=MA%3D%3D&sct=MTQ4NQ%3D%3D&mw=MzAw",
     content: "Apresenta um panorama da posição atual dos estoques, permitindo a análise do balanceamento e da disponibilidade de materiais."
-  }
-];
-
-const recursosHumanos = [
+  },
   {
     id: "rh_home",
     title: "Recursos Humanos",
@@ -2216,10 +2176,7 @@ const recursosHumanos = [
     title: "Eventos do eSocial",
     url: "https://helpsinge.lince.com.br/eventos_do_e_social_.html?ms=BQAAAQAAAgBaAAAIAkA0AUAEAg%3D%3D&st=MA%3D%3D&sct=MzUxNg%3D%3D&mw=Mzky",
     content: "Exibe os eventos enviados ao eSocial, permitindo o acompanhamento das informações trabalhistas e fiscais reportadas ao governo."
-  }
-];
-
-const internacionalizacao = [
+  },
   {
     id: "internacionalizacao_home",
     title: "Internacionalização",
@@ -2471,10 +2428,7 @@ const internacionalizacao = [
     title: "Status do Pedido – Kanban",
     url: "https://helpsinge.lince.com.br/status_pedido_kanban_.html?ms=BQAAAgAABgAAGBAIBAFAAVAgAQ%3D%3D&st=MA%3D%3D&sct=MTc5MA%3D%3D&mw=Mzky",
     content: "Interface que apresenta o status dos pedidos de exportação através de um sistema Kanban, permitindo aos gestores monitorar e atualizar o progresso das transações."
-  }
-];
-
-const comercial = [
+  },
   {
     id: "comercial_home",
     title: "Comercial",
@@ -2804,10 +2758,7 @@ const comercial = [
     title: "Estatísticas do Call Center",
     url: "https://helpsinge.lince.com.br/estatisticas_do_call_center_.html?ms=BQAACAAAMAAAAAAICBxQBQ%3D%3D&st=MA%3D%3D&sct=MjQzMQ%3D%3D&mw=Mzky",
     content: "Página que exibe estatísticas detalhadas do desempenho do call center, com indicadores que ajudam a melhorar o atendimento e as operações comerciais."
-  }
-];
-
-const marketing = [
+  },
   {
     id: "marketing_home",
     title: "Marketing",
@@ -2873,10 +2824,7 @@ const marketing = [
     title: "Transferência de Jobs",
     url: "https://helpsinge.lince.com.br/transferencia_de_jobs___.html?ms=BQAAAAAAAAAAAAAIEA%3D%3D&st=MA%3D%3D&sct=MA%3D%3D&mw=Mzky",
     content: "Ferramenta para a transferência de jobs entre setores ou equipes, possibilitando a redistribuição de tarefas e a continuidade das campanhas de marketing."
-  }
-];
-
-const planoOperacional = [
+  },
   {
     id: "po_1",
     title: "Plano Operacional",
@@ -2954,10 +2902,7 @@ const planoOperacional = [
     title: "Simulação de Demonstrativo de Resultados do P.O.",
     url: "https://helpsinge.lince.com.br/simula_demonstrativo_de_resultados_do_po.html?ms=BQAAAAAAAAAAAAAIIA%3D%3D&st=MA%3D%3D&sct=Njk%3D&mw=Mzky",
     content: "Ferramenta de simulação que gera um demonstrativo de resultados com base no plano operacional, permitindo prever o desempenho financeiro e operacional."
-  }
-];
-
-const linceShop = [
+  },
   {
     id: "lince_shop_1",
     title: "Venda a Funcionários",
@@ -2969,10 +2914,7 @@ const linceShop = [
     title: "Arquitetura do Módulo 18 - Lince Shop",
     url: "https://helpsinge.lince.com.br/arquitetura_do_modulo_18.html?ms=BQAAAAAAAAAAAAAIQA%3D%3D&st=MA%3D%3D&sct=MA%3D%3D&mw=Mzky",
     content: "Esta página detalha a arquitetura técnica do Módulo 18, que é parte integrante do sistema Lince Shop, explicando a estrutura, os componentes e os processos que suportam a operação e o gerenciamento das vendas para funcionários."
-  }
-];
-
-const manutencao = [
+  },
   {
     id: "manutencao_1",
     title: "Página Principal de Manutenção",
@@ -3068,10 +3010,7 @@ const manutencao = [
     title: "Gerenciamento de Permissões para Manutenção",
     url: "https://helpsinge.lince.com.br/permissoes_para_usuarios_da_manutencao.html?ms=CQAAAAEAAAAAAAAIAQY%3D&st=MA%3D%3D&sct=MTg4&mw=Mzky",
     content: "Página para configuração e gerenciamento das permissões de acesso para os usuários do módulo de manutenção, definindo os níveis de autorização e as responsabilidades de cada perfil."
-  }
-];
-
-const suporte = [
+  },
   {
     id: "suporte_1",
     title: "Página de Suporte",
@@ -3187,25 +3126,3 @@ const suporte = [
     content: "Interface para transferência de arquivos, facilitando o compartilhamento de documentos e informações entre os setores de suporte e outras áreas da organização."
   }
 ];
-
-const knowledgeBaseMixed = [  
-  apresentacao,
-  arquiteturaDoSinge,
-  lgpd,
-  modulos,
-  producao,
-  qualidade,
-  logistica,
-  financeiro,
-  contabilidade,
-  custos,
-  suprimentos,
-  recursosHumanos,
-  internacionalizacao,
-  comercial,
-  marketing,
-  planoOperacional,
-  linceShop,
-  manutencao,
-  suporte
-]
