@@ -16,7 +16,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js"></script>
   <!-- Font Awesome para os ícones das redes sociais -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  
   <style>
     /* ================================================== */
     /*                Variáveis de Cores                  */
@@ -25,7 +25,7 @@
       --color-primary: #C51631; /* vermelho */
       --color-primary-dark: #A3102A;
       --color-dark: #1A1A1A;
-      --color-light: #FFFCF8; /* Cor de fundo */
+      --color-light: #FFFCF8; /* Cor de fundo atualizada */
       --color-text: #333333;
       --color-border: #ABB8C3;
 
@@ -49,9 +49,6 @@
       flex-direction: column;
       /* Adiciona padding inferior para evitar que o chatbot se sobreponha ao rodapé */
       padding-bottom: 150px;
-      font-family: 'Arial', sans-serif;
-      background-color: var(--color-light);
-      color: var(--color-text);
     }
     main {
       flex: 1;
@@ -60,7 +57,11 @@
     /* ============================= */
     /* 1. Global Styles             */
     /* ============================= */
-    /* (Já definido acima, apenas consolidamos) */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: var(--color-light);
+      color: var(--color-text);
+    }
 
     /* ============================= */
     /* 2. Navbar                    */
@@ -87,23 +88,26 @@
     .navbar .nav-link.active {
       color: #EAF5F9;
     }
+    /* Customização do ícone do menu (hamburger) para mobile */
     .navbar-toggler {
       border-color: var(--color-primary) !important;
     }
-    /* Removemos a regra de background-image para usar o ícone padrão do Bootstrap */
     .navbar-toggler-icon {
-      /* Deixe sem sobrescrever o background-image para exibir as 3 linhas padrão */
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='var(--color-primary)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
     }
 
     /* ============================= */
     /* 3. Header (Banner Principal) */
     /* ============================= */
+    /* Alinha o título à esquerda, conforme solicitado */
     header .row.align-items-center > .col-md-8 {
       text-align: left !important;
     }
     header .row.align-items-center > .col-md-4 {
       text-align: right !important;
     }
+    
+    /* Alinhamento consistente para cabeçalho e cards */
     header .container,
     section .container {
       max-width: 1140px;
@@ -196,11 +200,13 @@
       margin: 0 auto;
       padding: 0 15px;
     }
+    /* Alinha os textos do rodapé à esquerda */
     .footer-contact,
     .footer-location,
     .footer-map {
       text-align: left !important;
     }
+    /* Ajusta a linha inferior do rodapé para distribuir o conteúdo */
     .footer-bottom {
       display: flex;
       flex-wrap: wrap;
@@ -362,6 +368,7 @@
       height: 100%;
     }
   </style>
+  
 </head>
 <body>
   <!-- Navbar -->
@@ -370,7 +377,6 @@
       <a class="navbar-brand" href="https://lincetec.com.br/">LINCE TECH</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <!-- O ícone padrão do Bootstrap será usado aqui -->
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
