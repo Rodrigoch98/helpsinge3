@@ -67,23 +67,28 @@ body {
 /* ============================= */
 /* 2. Header (Banner Principal) */
 /* ============================= */
-/* Seções de cabeçalho podem usar as classes Bootstrap (py-5, etc.)
-   Remove a forçagem de display flex do snippet anterior. */
-header .row.align-items-center > .col-md-8 {
-  text-align: left !important;
+header,
+header.bg-primary {
+  background-color: var(--color-light) !important;
+  color: var(--color-primary) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0;
 }
-header .row.align-items-center > .col-md-4 {
-  text-align: right !important;
+header .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 0;
+  width: 100%;
 }
-header .container,
-section .container {
-      color-text: #C51631;
-      max-width: 1140px;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 15px;
-      padding-right: 15px;
-      margin-top: 50px;
+header .display-4,
+header .lead {
+  margin: 0.1rem 0;
+  font-family: 'Montserrat', sans-serif !important;
+  color: var(--color-primary) !important;
 }
 
 /* ============================= */
