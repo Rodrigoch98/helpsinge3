@@ -746,7 +746,7 @@
     async function getDynamicResponse(query) {
       if (!window.knowledgeBase) {
         try {
-          const response = await fetch('knowledgeBase.json');
+          const response = await fetch('src/knowledgeBase.json');
           window.knowledgeBase = await response.json();
         } catch (error) {
           console.error('Erro ao carregar knowledgeBase.json:', error);
