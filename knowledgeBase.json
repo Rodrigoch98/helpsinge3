@@ -1,52 +1,52 @@
 [
-{
-  id: "apresentacao",
-  title: "Apresentação",
-  url: "https://helpsinge.lince.com.br/apresentacao.html?ms=AAAAAAAAAAAAAAA%3D&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
-  content: "Esta página de apresentação oferece uma visão geral do sistema HelpSinge, detalhando seus objetivos, funcionalidades e a proposta de valor do projeto. Serve como uma introdução para novos usuários, explicando como o sistema pode contribuir para a gestão e o suporte de processos, além de destacar os principais recursos e benefícios do uso da plataforma."
-},
-{
-  id: "arquitetura-do-singe",
-  title: "Arquitetura do Singe",
-  url: "https://helpsinge.lince.com.br/arquitetura_singe.html?ms=AAAAAAAAAAAAAAA%3D&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
-  content: "Esta página apresenta uma visão detalhada da arquitetura central do sistema HelpSinge, explicando os principais componentes, sua interligação e a lógica que sustenta o funcionamento da plataforma."
-    },
-    {
-  id: "arquitetura-do-singe",
-  title: "Arquitetura do Singe",
-  url: "https://helpsinge.lince.com.br/interface_basica_singe.html?ms=AQAAAAAAAAAAAAAE&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
-  content: "Nesta página é exibida a interface básica do HelpSinge, destacando os elementos de design e usabilidade que facilitam a interação do usuário com o sistema, demonstrando a organização dos menus e funcionalidades essenciais."
-    },
-    {
-  id: "arquitetura-do-singe",
-  title: "Arquitetura do Singe",
-  url: "https://helpsinge.lince.com.br/configuracoes_minimas.html?ms=AQAAAAAAAAAAAAAE&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
-  content: "Esta página descreve as configurações mínimas necessárias para a implementação do HelpSinge, informando os requisitos técnicos e as especificações básicas que garantem o desempenho adequado e a segurança do sistema."
-    },
   {
-  id: "lgpd",
-  title: "LGPD",
-  url: "https://helpsinge.lince.com.br/canais_de_atendimento.html?ms=AQAAAAAAAAAAAAAE&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
-  content: "Esta página apresenta os canais de atendimento do HelpSinge, explicando como os usuários podem obter suporte e informações, com atenção especial aos procedimentos e práticas relacionados à proteção de dados, conforme os requisitos da LGPD."
-    },
-    {
-  id: "lgpd",
-  title: "LGPD",
-  url: "https://helpsinge.lince.com.br/lgpd___lei_geral_de_protecao_de_dados_pessoais__lgpd___lei_n__13_709_2018.html?ms=AwAAAAAAAAAAAAAEAQ%3D%3D&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
-  content: "Nesta página é detalhada a Lei Geral de Proteção de Dados Pessoais (LGPD), Lei nº 13.709/2018, com informações sobre seus principais dispositivos, obrigações e orientações para garantir o tratamento seguro e ético dos dados pessoais no âmbito do HelpSinge."
-    },
+    id: "apresentacao",
+    title: "Apresentação",
+    url: "https://helpsinge.lince.com.br/apresentacao.html?ms=AAAAAAAAAAAAAAA%3D&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
+    content: "Esta página de apresentação oferece uma visão geral do sistema HelpSinge, detalhando seus objetivos, funcionalidades e a proposta de valor do projeto. Serve como uma introdução para novos usuários, explicando como o sistema pode contribuir para a gestão e o suporte de processos, além de destacar os principais recursos e benefícios do uso da plataforma."
+  },
   {
-  id: "modulos",
-  title: "Módulos",
-  url: "https://helpsinge.lince.com.br/glossario_lgpd.html?ms=AwAAAAAAAAAAAAAEAQ%3D%3D&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
-  content: "Esta página apresenta um glossário específico relacionado à LGPD, oferecendo definições e explicações dos termos técnicos utilizados no contexto da proteção de dados. O glossário serve para auxiliar os usuários a compreenderem a terminologia aplicada no sistema HelpSinge."
-    },
-    {
-  id: "modulos",
-  title: "Módulos",
-  url: "https://helpsinge.lince.com.br/modulos.html?ms=AwAAAAAAAAAAAAAMAQ%3D%3D&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
-  content: "Nesta página são detalhados os módulos do HelpSinge, fornecendo uma visão geral das funcionalidades e dos componentes que compõem o sistema. O conteúdo facilita a compreensão dos diferentes blocos operacionais, permitindo aos usuários identificar e navegar entre as diversas áreas de aplicação."
-    },
+    id: "arquitetura-do-singe",
+    title: "Arquitetura do Singe",
+    url: "https://helpsinge.lince.com.br/arquitetura_singe.html?ms=AAAAAAAAAAAAAAA%3D&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
+    content: "Esta página apresenta uma visão detalhada da arquitetura central do sistema HelpSinge, explicando os principais componentes, sua interligação e a lógica que sustenta o funcionamento da plataforma."
+  },
+  {
+    id: "arquitetura-do-singe",
+    title: "Arquitetura do Singe",
+    url: "https://helpsinge.lince.com.br/interface_basica_singe.html?ms=AQAAAAAAAAAAAAAE&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
+    content: "Nesta página é exibida a interface básica do HelpSinge, destacando os elementos de design e usabilidade que facilitam a interação do usuário com o sistema, demonstrando a organização dos menus e funcionalidades essenciais."
+  },
+  {
+    id: "arquitetura-do-singe",
+    title: "Arquitetura do Singe",
+    url: "https://helpsinge.lince.com.br/configuracoes_minimas.html?ms=AQAAAAAAAAAAAAAE&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
+    content: "Esta página descreve as configurações mínimas necessárias para a implementação do HelpSinge, informando os requisitos técnicos e as especificações básicas que garantem o desempenho adequado e a segurança do sistema."
+  },
+  {
+    id: "lgpd",
+    title: "LGPD",
+    url: "https://helpsinge.lince.com.br/canais_de_atendimento.html?ms=AQAAAAAAAAAAAAAE&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
+    content: "Esta página apresenta os canais de atendimento do HelpSinge, explicando como os usuários podem obter suporte e informações, com atenção especial aos procedimentos e práticas relacionados à proteção de dados, conforme os requisitos da LGPD."
+  },
+  {
+    id: "lgpd",
+    title: "LGPD",
+    url: "https://helpsinge.lince.com.br/lgpd___lei_geral_de_protecao_de_dados_pessoais__lgpd___lei_n__13_709_2018.html?ms=AwAAAAAAAAAAAAAEAQ%3D%3D&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
+    content: "Nesta página é detalhada a Lei Geral de Proteção de Dados Pessoais (LGPD), Lei nº 13.709/2018, com informações sobre seus principais dispositivos, obrigações e orientações para garantir o tratamento seguro e ético dos dados pessoais no âmbito do HelpSinge."
+  },
+  {
+    id: "modulos",
+    title: "Módulos",
+    url: "https://helpsinge.lince.com.br/glossario_lgpd.html?ms=AwAAAAAAAAAAAAAEAQ%3D%3D&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
+    content: "Esta página apresenta um glossário específico relacionado à LGPD, oferecendo definições e explicações dos termos técnicos utilizados no contexto da proteção de dados. O glossário serve para auxiliar os usuários a compreenderem a terminologia aplicada no sistema HelpSinge."
+  },
+  {
+    id: "modulos",
+    title: "Módulos",
+    url: "https://helpsinge.lince.com.br/modulos.html?ms=AwAAAAAAAAAAAAAMAQ%3D%3D&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
+    content: "Nesta página são detalhados os módulos do HelpSinge, fornecendo uma visão geral das funcionalidades e dos componentes que compõem o sistema. O conteúdo facilita a compreensão dos diferentes blocos operacionais, permitindo aos usuários identificar e navegar entre as diversas áreas de aplicação."
+  },
   {
     id: "gestao_da_producao",
     title: "Gestão da Produção",
