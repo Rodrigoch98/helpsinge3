@@ -16,7 +16,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js"></script>
   <!-- Font Awesome para os ícones das redes sociais -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <style>
     /* ================================================== */
     /*                Variáveis de Cores                  */
@@ -25,7 +25,7 @@
       --color-primary: #C51631; /* vermelho */
       --color-primary-dark: #A3102A;
       --color-dark: #1A1A1A;
-      --color-light: #FFFCF8; /* Cor de fundo atualizada */
+      --color-light: #FFFCF8; /* Cor de fundo */
       --color-text: #333333;
       --color-border: #ABB8C3;
 
@@ -49,6 +49,9 @@
       flex-direction: column;
       /* Adiciona padding inferior para evitar que o chatbot se sobreponha ao rodapé */
       padding-bottom: 150px;
+      font-family: 'Arial', sans-serif;
+      background-color: var(--color-light);
+      color: var(--color-text);
     }
     main {
       flex: 1;
@@ -57,11 +60,7 @@
     /* ============================= */
     /* 1. Global Styles             */
     /* ============================= */
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: var(--color-light);
-      color: var(--color-text);
-    }
+    /* (Já definido acima, apenas consolidamos) */
 
     /* ============================= */
     /* 2. Navbar                    */
@@ -88,26 +87,23 @@
     .navbar .nav-link.active {
       color: #EAF5F9;
     }
-    /* Customização do ícone do menu (hamburger) para mobile */
     .navbar-toggler {
       border-color: var(--color-primary) !important;
     }
+    /* Removemos a regra de background-image para usar o ícone padrão do Bootstrap */
     .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='var(--color-primary)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+      /* Deixe sem sobrescrever o background-image para exibir as 3 linhas padrão */
     }
 
     /* ============================= */
     /* 3. Header (Banner Principal) */
     /* ============================= */
-    /* Alinha o título à esquerda, conforme solicitado */
     header .row.align-items-center > .col-md-8 {
       text-align: left !important;
     }
     header .row.align-items-center > .col-md-4 {
       text-align: right !important;
     }
-    
-    /* Alinhamento consistente para cabeçalho e cards */
     header .container,
     section .container {
       max-width: 1140px;
@@ -201,13 +197,11 @@
       margin: 0 auto;
       padding: 0 15px;
     }
-    /* Alinha os textos do rodapé à esquerda */
     .footer-contact,
     .footer-location,
     .footer-map {
       text-align: left !important;
     }
-    /* Ajusta a linha inferior do rodapé para distribuir o conteúdo */
     .footer-bottom {
       display: flex;
       flex-wrap: wrap;
@@ -369,7 +363,6 @@
       height: 100%;
     }
   </style>
-  
 </head>
 <body>
   <!-- Navbar -->
@@ -378,6 +371,7 @@
       <a class="navbar-brand" href="https://lincetec.com.br/">LINCE TECH</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- O ícone padrão do Bootstrap será usado aqui -->
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
@@ -413,7 +407,7 @@
         </div>
       </div>
     </header>
-
+    
     <!-- Seção de Cards (Home) -->
     <section class="pt-2 pb-5">
       <div class="container">
@@ -602,12 +596,12 @@
       </div><!-- .container -->
     </section>
   </main>
-
+  
   <!-- Rodapé -->
   <footer class="custom-footer">
     <div class="container">
       <div class="row">
-        <!-- Coluna 1: Contato e Redes Sociais -->
+        <!-- Coluna 1: Contato e Redes Sociais (alinhado à esquerda) -->
         <div class="col-md-4 text-start mb-3 footer-contact">
           <h3>Contato</h3>
           <p><a href="mailto:crm.lince@lince.com.br">crm.lince@lince.com.br</a></p>
@@ -628,27 +622,26 @@
             </p>
           </div>
         </div>
-        <!-- Coluna 2: Onde estamos -->
+        <!-- Coluna 2: Onde estamos (alinhado à esquerda) -->
         <div class="col-md-4 text-start mb-3 footer-location">
           <h3>Onde estamos</h3>
           <p style="margin-bottom: 0;">Rua Dr. Nereu Ramos, n° 750 Coloninha, Gaspar SC</p>
           <p style="margin-top: 5px;">Cep: 89110-110</p>
         </div>
-        <!-- Coluna 3: Localização (mapa) -->
+        <!-- Coluna 3: Localização (alinhado à esquerda) -->
         <div class="col-md-4 text-start mb-3 footer-map">
           <h3>Localização</h3>
-          <iframe
+          <iframe 
             src="https://www.google.com/maps?q=Rua+Dr.+Nereu+Ramos,+750,+Coloninha,+Gaspar,+SC,+89110-110&output=embed"
             width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy">
           </iframe>
         </div>
       </div>
-      <!-- Footer Bottom: logo à esquerda e direitos reservados à direita -->
+      <!-- Footer Bottom: logotipo à esquerda e direitos reservados à direita -->
       <div class="row mt-3 footer-bottom">
         <div class="col-md-6 text-start">
           <a href="https://lincetec.com.br/">
-            <img src="https://lincetec.com.br/wp-content/uploads/2023/06/logo-lince-tipografia.png" 
-                 alt="Lince Tech" class="logo-bottom">
+            <img src="https://lincetec.com.br/wp-content/uploads/2023/06/logo-lince-tipografia.png" alt="Lince Tech" class="logo-bottom">
           </a>
         </div>
         <div class="col-md-6 text-end">
@@ -657,8 +650,8 @@
       </div>
     </div>
   </footer>
-
-  <!-- Botão para abrir/fechar o Chat (Lordicon) -->
+  
+  <!-- Botão de toggle do Chat (ícone animado) -->
   <button id="chat-toggle">
     <lord-icon
       src="https://cdn.lordicon.com/ecngpoqo.json"
@@ -667,7 +660,7 @@
       style="width:100%; height:100%;">
     </lord-icon>
   </button>
-
+  
   <!-- Widget do Chat -->
   <div id="chat-widget" class="chat-hidden">
     <div id="chat-header">
@@ -683,13 +676,13 @@
       <button id="send-button">Enviar</button>
     </div>
   </div>
-
-  <!-- Script Bootstrap -->
+  
+  <!-- Scripts do Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Script do Chatbot / Ajustes Dinâmicos -->
+  
+  <!-- Script do Chatbot e ajustes dinâmicos -->
   <script>
-    // Adiciona mensagens ao chat
+    // Função para adicionar mensagens ao chat
     function addMessage(content, sender = 'bot') {
       const chatBody = document.getElementById('chat-messages');
       const message = document.createElement('div');
@@ -699,12 +692,12 @@
       chatBody.scrollTop = chatBody.scrollHeight;
     }
 
-    // Preprocessamento de texto
+    // Função para processar o texto (remove espaços laterais)
     function preprocessText(text) {
       return text.trim();
     }
 
-    // Saudação inicial
+    // Função que define a saudação (com saudação e pergunta de ajuda)
     function getGreeting() {
       const now = new Date();
       const hour = now.getHours();
@@ -720,10 +713,12 @@
       return greeting;
     }
 
+    // Exibe a mensagem de saudação ao carregar o DOM
     document.addEventListener("DOMContentLoaded", function() {
       addMessage(getGreeting(), "bot");
     });
 
+    // Função para enviar a mensagem do usuário e buscar resposta dinâmica
     async function sendMessage() {
       const input = document.getElementById('message-input');
       const userMessage = preprocessText(input.value);
@@ -734,6 +729,7 @@
       }
     }
 
+    // Função que processa a mensagem do usuário e busca uma resposta dinâmica
     async function handleUserMessage(message) {
       try {
         const response = await getDynamicResponse(message);
@@ -744,6 +740,7 @@
       }
     }
 
+    // IMPLEMENTAÇÃO CORRIGIDA: Busca dinâmica utilizando a base de conhecimento e Lunr.js.
     async function getDynamicResponse(query) {
       if (!window.knowledgeBase) {
         try {
@@ -754,7 +751,7 @@
           return "Desculpe, ocorreu um erro ao carregar a base de conhecimento.";
         }
       }
-
+      
       if (!window.lunrIndex) {
         window.lunrIndex = lunr(function() {
           this.ref('id');
@@ -765,7 +762,7 @@
           }, this);
         });
       }
-
+      
       const results = window.lunrIndex.search(query);
       if (results.length > 0) {
         const firstResultRef = results[0].ref;
@@ -776,6 +773,7 @@
       }
     }
 
+    // Eventos para envio de mensagem
     document.getElementById('message-input').addEventListener('keydown', function(event) {
       if (event.key === 'Enter') {
         event.preventDefault();
@@ -784,11 +782,13 @@
     });
     document.getElementById('send-button').addEventListener('click', sendMessage);
 
+    // Eventos para abrir, minimizar e fechar o chat
     document.getElementById('chat-toggle').addEventListener('click', function() {
       const chatWidget = document.getElementById('chat-widget');
       const chatToggle = document.getElementById('chat-toggle');
-      if (!chatWidget.style.display || chatWidget.style.display === 'none') {
+      if (chatWidget.style.display === 'none' || chatWidget.style.display === '') {
         chatWidget.style.display = 'flex';
+        // Oculta o ícone do chatbot quando o chat é aberto
         chatToggle.style.display = 'none';
       } else {
         chatWidget.style.display = 'none';
@@ -806,11 +806,12 @@
       chatToggle.style.display = 'block';
     });
 
+    // Ajuste dinâmico para que o ícone do chatbot não ultrapasse o rodapé
     window.addEventListener('scroll', function() {
       const chatToggle = document.getElementById('chat-toggle');
       const footer = document.querySelector('.custom-footer');
       const footerRect = footer.getBoundingClientRect();
-      const defaultBottom = 20;
+      const defaultBottom = 20; // 20px padrão
       if (footerRect.top < window.innerHeight) {
         const overlap = window.innerHeight - footerRect.top;
         chatToggle.style.bottom = (defaultBottom + overlap) + 'px';
@@ -819,5 +820,14 @@
       }
     });
   </script>
+
+  <style>
+    /* Estado minimizado: oculta mensagens e área de entrada */
+    #chat-widget.minimized #chat-messages,
+    #chat-widget.minimized #chat-input {
+      display: none;
+    }
+  </style>
+  
 </body>
 </html>
