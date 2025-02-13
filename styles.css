@@ -5,7 +5,7 @@
   --color-primary: #C51631; /* vermelho */
   --color-primary-dark: #A3102A;
   --color-dark: #1A1A1A;
-  --color-light: #FFFCF8; /* fundo atualizado */
+  --color-light: #ffffff; /* fundo volta ao branco */
   --color-text: #333333;
   --color-border: #ABB8C3;
 
@@ -17,34 +17,22 @@
 }
 
 /* ============================= */
-/* 0. Sticky Footer Setup       */
+/* 0. Global / Reset            */
 /* ============================= */
 html, body {
-  height: 100%;
+  height: auto; /* remove altura forçada */
   margin: 0;
   padding: 0;
 }
 body {
-  display: flex;
-  flex-direction: column;
-  /* Caso queira maior espaço para o chatbot, ajuste aqui: */
-  padding-bottom: 150px;
-}
-main {
-  flex: 1;
-}
-
-/* ============================= */
-/* 1. Global Styles             */
-/* ============================= */
-body {
+  /* remove display flex e padding-bottom que causava diferença no rodapé/chatbot */
   font-family: 'Arial', sans-serif;
   background-color: var(--color-light);
   color: var(--color-text);
 }
 
 /* ============================= */
-/* 2. Navbar                    */
+/* 1. Navbar                    */
 /* ============================= */
 .navbar {
   background-color: var(--color-dark);
@@ -71,11 +59,16 @@ body {
 .navbar-toggler {
   border-color: var(--color-primary) !important;
 }
-/* Removido o custom background-image para o navbar-toggler-icon, voltamos ao default do Bootstrap */
+/* Voltando ao ícone default do Bootstrap (removendo imagem customizada) */
+.navbar-toggler-icon {
+  /* Ícone padrão do Bootstrap, sem sobrescrever */
+}
 
 /* ============================= */
-/* 3. Header (Banner Principal) */
+/* 2. Header (Banner Principal) */
 /* ============================= */
+/* Seções de cabeçalho podem usar as classes Bootstrap (py-5, etc.)
+   Remove a forçagem de display flex do snippet anterior. */
 header .row.align-items-center > .col-md-8 {
   text-align: left !important;
 }
@@ -92,8 +85,9 @@ section .container {
 }
 
 /* ============================= */
-/* 4. Seção Geral               */
+/* 3. Seção Geral               */
 /* ============================= */
+/* Volta ao padding “padrão” ou controlado via classes Bootstrap. */
 section {
   background-color: var(--color-light);
   padding: 50px 0;
@@ -105,7 +99,7 @@ section {
 }
 
 /* ============================= */
-/* 5. Cards de Documentação/Home */
+/* 4. Cards de Documentação/Home */
 /* ============================= */
 .card {
   transition: transform var(--transition-speed), box-shadow var(--transition-speed);
@@ -140,7 +134,7 @@ section {
 }
 
 /* ============================= */
-/* 6. Botões “Acessar”          */
+/* 5. Botões “Acessar”          */
 /* ============================= */
 .btn-primary {
   background-color: var(--color-primary) !important;
@@ -154,7 +148,7 @@ section {
 }
 
 /* ============================= */
-/* 7. Custom Footer             */
+/* 6. Custom Footer             */
 /* ============================= */
 .custom-footer {
   background-color: var(--color-dark);
@@ -208,7 +202,7 @@ section {
 }
 
 /* ============================= */
-/* 8. Formulários               */
+/* 7. Formulários               */
 /* ============================= */
 .form-label {
   color: var(--color-text);
@@ -224,21 +218,21 @@ section {
 }
 
 /* ============================= */
-/* 9. Ícone no Botão "Acessar"   */
+/* 8. Ícone no Botão "Acessar"   */
 /* ============================= */
 .acessar-icon {
   color: var(--color-primary);
 }
 
 /* ============================= */
-/* 10. Chat Widget (Modernizado)  */
+/* 9. Chat Widget (Modernizado)  */
 /* ============================= */
 #chat-widget {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 400px;
-  max-height: 500px;
+  width: 400px;        /* Valor que estava no snippet, caso queira maior ou menor */
+  max-height: 500px;   /* Idem */
   background: var(--color-light);
   border: 1px solid #ccc;
   border-radius: 12px;
