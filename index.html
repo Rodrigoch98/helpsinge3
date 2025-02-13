@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -8,260 +8,101 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Lordicon -->
   <script src="https://cdn.lordicon.com/lordicon.js"></script>
-  <!-- Google Fonts (Montserrat) -->
+  <!-- Google Fonts (Montserrat para títulos) -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
   <!-- Custom Styles -->
   <link rel="stylesheet" href="styles.css">
   <!-- Lunr.js (opcional) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js"></script>
-  <!-- Font Awesome para os ícones das redes sociais -->
+  <!-- Font Awesome (ícones redes sociais) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* ================================================== */
-    /*                Variáveis de Cores                  */
-    /* ================================================== */
-    :root {
-      --color-primary: #C51631; /* vermelho */
-      --color-primary-dark: #A3102A;
-      --color-dark: #1A1A1A;
-      --color-light: #FFFCF8; /* Cor de fundo */
-      --color-text: #333333;
-      --color-border: #ABB8C3;
-
-      --transition-speed: 0.3s;
-      --box-shadow-base: 0 4px 8px rgba(0, 0, 0, 0.05);
-      --box-shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.1);
-
-      --card-hover-color: #f2f2f2; /* Cinza claro */
-    }
-
     /* ============================= */
-    /* 0. Sticky Footer Setup       */
+    /* 0. Reset / Body Global       */
     /* ============================= */
     html, body {
-      height: 100%;
       margin: 0;
       padding: 0;
+      /* Removemos o display flex e padding-bottom, voltando ao padrão */
     }
     body {
-      display: flex;
-      flex-direction: column;
-      /* Adiciona padding inferior para evitar que o chatbot se sobreponha ao rodapé */
-      padding-bottom: 150px;
-      /* REVERTENDO para Montserrat */
-      font-family: 'Montserrat', sans-serif;
-      background-color: var(--color-light);
-      color: var(--color-text);
-    }
-    main {
-      flex: 1;
+      /* Reverte para a cor de fundo clara (ou branca padrão) e uso da fonte Montserrat para títulos (se desejar, ou em headings) */
+      background-color: #fff; /* ou a cor que estava no original */
+      color: #212529;         /* cor de texto padrão do Bootstrap */
+      font-family: sans-serif; 
+      /* Obs.: Se quiser que TODO o texto use Montserrat, substitua por: font-family: 'Montserrat', sans-serif; */
     }
 
     /* ============================= */
-    /* 1. Global Styles             */
-    /* ============================= */
-    /* (Mantido sem alterações extras) */
-
-    /* ============================= */
-    /* 2. Navbar                    */
+    /* 1. Navbar                    */
     /* ============================= */
     .navbar {
-      background-color: var(--color-dark);
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     .navbar .navbar-brand {
-      color: var(--color-light);
       font-weight: bold;
       text-decoration: none;
-    }
-    .navbar .navbar-brand:hover {
-      color: var(--color-primary) !important;
-    }
-    .navbar .nav-link {
-      color: var(--color-light);
-      transition: color var(--transition-speed);
-    }
-    .navbar .nav-link:hover {
-      color: var(--color-primary) !important;
     }
     .navbar .nav-link.active {
       color: #EAF5F9;
     }
+    /* Mantemos as configurações de cor do navbar (bg-dark, etc.) através do Bootstrap classes */
     .navbar-toggler {
-      border-color: var(--color-primary) !important;
-    }
-    .navbar-toggler-icon {
-      /* Mantemos o ícone padrão do Bootstrap */
+      border-color: #C51631 !important; /* Cor primária caso queira destacar o ícone toggler */
     }
 
     /* ============================= */
-    /* 3. Header (Banner Principal) */
+    /* 2. Header (Banner Principal) */
     /* ============================= */
-    /* Mantido o py-5 para espaçamento superior */
-    header.py-5 {
-      /* sem alterações diretas no h1 (usa cor #333 por padrão, ou cor do Bootstrap) */
+    header {
+      /* Reverte para margin/spacing original (por exemplo, py-5 ou my-5) */
     }
     header .row.align-items-center > .col-md-8 {
-      text-align: left !important;
+      /* Removido o text-align forçado, volta ao comportamento bootstrap */
     }
     header .row.align-items-center > .col-md-4 {
-      text-align: right !important;
+      /* Removido o text-align forçado, volta ao comportamento bootstrap */
     }
-    header .container,
-    section .container {
-      max-width: 1140px;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 15px;
-      padding-right: 15px;
+    /* Se quiser manter o espaçamento vertical amplo, use as classes do Bootstrap:
+       <header class="py-5"> ou <header class="my-5"> no HTML. */
+
+    /* Título principal usando a fonte Montserrat para destaque (opcional) */
+    h1.display-4 {
+      font-family: 'Montserrat', sans-serif; /* grande, grosso, cor #212529 do bootstrap */
+      /* Se quiser forçar alguma cor, ex.: color: #212529; */
     }
 
     /* ============================= */
-    /* 4. Seção Geral               */
+    /* 3. Seção de Cards / Home     */
     /* ============================= */
-    section {
-      background-color: var(--color-light);
-      padding: 50px 0;
-    }
-    @media (max-width: 576px) {
-      section {
-        padding: 30px 0;
-      }
+    /* Mantemos as classes e estilos de card do snippet original, se houver algo no styles.css
+       Aqui, apenas removendo qualquer redefinição de cor/fonte que conflite. */
+    .card-title {
+      font-family: 'Montserrat', sans-serif; /* mantém destaque no título */
     }
 
     /* ============================= */
-    /* 5. Cards de Documentação/Home */
-    /* ============================= */
-    .card {
-      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-      border: 1px solid var(--color-border);
-      border-radius: 10px;
-      background-color: var(--color-light);
-      color: var(--color-text);
-      box-shadow: var(--box-shadow-base);
-      margin-bottom: 1rem;
-    }
-    .card-body {
-      padding: 20px;
-    }
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--box-shadow-hover);
-      background-color: var(--card-hover-color) !important;
-    }
-    .card-body i {
-      transition: transform var(--transition-speed) ease;
-    }
-    .card:hover i {
-      transform: scale(1.1);
-    }
-    .card i.text-primary {
-      color: var(--color-primary) !important;
-    }
-    .card a {
-      display: block;
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* ============================= */
-    /* 6. Botões “Acessar”          */
-    /* ============================= */
-    .btn-primary {
-      background-color: var(--color-primary) !important;
-      border-color: var(--color-primary-dark) !important;
-      color: #fff !important;
-    }
-    .btn-primary:hover {
-      background-color: var(--color-light) !important;
-      border-color: var(--color-primary) !important;
-      color: var(--color-primary) !important;
-    }
-
-    /* ============================= */
-    /* 7. Custom Footer             */
+    /* 4. Footer                    */
     /* ============================= */
     .custom-footer {
-      background-color: var(--color-dark);
-      color: var(--color-light);
+      background-color: #1A1A1A;
+      color: #f8f9fa; 
       padding: 20px 0 10px 0;
       font-size: 0.9rem;
     }
-    .custom-footer a {
-      color: var(--color-light);
-      text-decoration: none;
-    }
-    .custom-footer a:hover {
-      color: var(--color-primary);
-    }
-    .custom-footer .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 15px;
-    }
-    .footer-contact,
-    .footer-location,
-    .footer-map {
-      text-align: left !important;
-    }
     .footer-bottom {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
       border-top: 1px solid #333;
       padding-top: 10px;
       margin-top: 20px;
     }
-    .footer-bottom .col-md-6:first-child {
-      text-align: left;
-    }
-    .footer-bottom .col-md-6:last-child {
-      text-align: right;
-    }
-    .footer-bottom .logo-bottom {
-      max-width: 150px;
-      height: auto;
-      margin: 0 auto;
-    }
-    .footer-social-inside p {
-      margin: 5px 0;
-    }
-    .footer-social-inside i {
-      margin-right: 5px;
-      vertical-align: middle;
-    }
 
     /* ============================= */
-    /* 8. Formulários               */
-    /* ============================= */
-    .form-label {
-      color: var(--color-text);
-    }
-    .form-control {
-      background-color: var(--color-light);
-      color: var(--color-text);
-      border: 1px solid var(--color-border);
-    }
-    .form-control:focus {
-      border-color: var(--color-primary);
-      box-shadow: none;
-    }
-
-    /* ============================= */
-    /* 9. Ícone no Botão "Acessar"   */
-    /* ============================= */
-    .acessar-icon {
-      color: var(--color-primary);
-    }
-
-    /* ============================= */
-    /* 10. Chat Widget (Modernizado)  */
+    /* 5. Chat Widget               */
     /* ============================= */
     #chat-widget {
       position: fixed;
-      bottom: 20px; /* valor padrão, reajustado via JS ao rolar a página */
+      bottom: 20px;
       right: 20px;
       width: 300px;
       max-height: 400px;
@@ -269,7 +110,7 @@
       border: 1px solid #ccc;
       border-radius: 12px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      display: flex;
+      display: none; /* Começa oculto, será exibido no toggle */
       flex-direction: column;
       overflow: hidden;
       z-index: 1200;
@@ -351,7 +192,7 @@
     /* Botão do Chat Toggle */
     #chat-toggle {
       position: fixed;
-      bottom: 20px; /* valor padrão, reajustado via JS */
+      bottom: 20px;
       right: 20px;
       background: transparent;
       border: none;
@@ -365,6 +206,12 @@
       width: 100%;
       height: 100%;
     }
+
+    /* Estado minimizado: oculta as mensagens e a área de entrada */
+    #chat-widget.minimized #chat-messages,
+    #chat-widget.minimized #chat-input {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -374,8 +221,7 @@
       <a class="navbar-brand" href="https://lincetec.com.br/">LINCE TECH</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <!-- Ícone padrão do Bootstrap para menu hamburger -->
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span><!-- Ícone padrão do Bootstrap -->
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
@@ -388,20 +234,21 @@
       </div>
     </div>
   </nav>
-  
+
   <!-- Conteúdo Principal -->
   <main>
-    <!-- Banner Principal (mantém py-5 e estilos originais) -->
+    <!-- Banner Principal (retorno ao espaçamento original, por exemplo py-5) -->
     <header class="py-5">
       <div class="container">
         <div class="row align-items-center">
-          <!-- Título e subtítulo alinhados à esquerda -->
+          <!-- Bloco do título e subtítulo -->
           <div class="col-md-8">
-            <h1 class="display-4">HELP SINGE</h1>
+            <!-- Título com display-4, cor e fonte bootstrap padrão -->
+            <h1 class="display-4" style="font-family: 'Montserrat', sans-serif;">HELP SINGE</h1>
             <p class="lead">Acesso rápido às documentações de todas as áreas do Singe.</p>
           </div>
-          <!-- Logo alinhada à direita -->
-          <div class="col-md-4">
+          <!-- Bloco da logo -->
+          <div class="col-md-4 text-md-end">
             <a href="https://lincetec.com.br/">
               <img src="https://lincetec.com.br/wp-content/uploads/2023/06/logo-lince-tipografia.png" 
                    alt="Lince Tech Logo" class="img-fluid" style="max-width: 250px;">
@@ -410,7 +257,7 @@
         </div>
       </div>
     </header>
-    
+
     <!-- Seção de Cards (Home) -->
     <section class="pt-2 pb-5">
       <div class="container">
@@ -599,12 +446,12 @@
       </div><!-- .container -->
     </section>
   </main>
-  
+
   <!-- Rodapé -->
   <footer class="custom-footer">
     <div class="container">
       <div class="row">
-        <!-- Coluna 1: Contato e Redes Sociais (alinhado à esquerda) -->
+        <!-- Coluna 1: Contato e Redes Sociais -->
         <div class="col-md-4 text-start mb-3 footer-contact">
           <h3>Contato</h3>
           <p><a href="mailto:crm.lince@lince.com.br">crm.lince@lince.com.br</a></p>
@@ -625,26 +472,27 @@
             </p>
           </div>
         </div>
-        <!-- Coluna 2: Onde estamos (alinhado à esquerda) -->
+        <!-- Coluna 2: Onde estamos -->
         <div class="col-md-4 text-start mb-3 footer-location">
           <h3>Onde estamos</h3>
           <p style="margin-bottom: 0;">Rua Dr. Nereu Ramos, n° 750 Coloninha, Gaspar SC</p>
           <p style="margin-top: 5px;">Cep: 89110-110</p>
         </div>
-        <!-- Coluna 3: Localização (alinhado à esquerda) -->
+        <!-- Coluna 3: Localização (mapa) -->
         <div class="col-md-4 text-start mb-3 footer-map">
           <h3>Localização</h3>
-          <iframe 
+          <iframe
             src="https://www.google.com/maps?q=Rua+Dr.+Nereu+Ramos,+750,+Coloninha,+Gaspar,+SC,+89110-110&output=embed"
             width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy">
           </iframe>
         </div>
       </div>
-      <!-- Footer Bottom: logotipo à esquerda e direitos reservados à direita -->
+      <!-- Footer Bottom: logo à esquerda e direitos reservados à direita -->
       <div class="row mt-3 footer-bottom">
         <div class="col-md-6 text-start">
           <a href="https://lincetec.com.br/">
-            <img src="https://lincetec.com.br/wp-content/uploads/2023/06/logo-lince-tipografia.png" alt="Lince Tech" class="logo-bottom">
+            <img src="https://lincetec.com.br/wp-content/uploads/2023/06/logo-lince-tipografia.png" 
+                 alt="Lince Tech" class="logo-bottom">
           </a>
         </div>
         <div class="col-md-6 text-end">
@@ -653,8 +501,8 @@
       </div>
     </div>
   </footer>
-  
-  <!-- Botão de toggle do Chat (ícone animado) -->
+
+  <!-- Botão para abrir/fechar o Chat (Lordicon) -->
   <button id="chat-toggle">
     <lord-icon
       src="https://cdn.lordicon.com/ecngpoqo.json"
@@ -663,7 +511,7 @@
       style="width:100%; height:100%;">
     </lord-icon>
   </button>
-  
+
   <!-- Widget do Chat -->
   <div id="chat-widget" class="chat-hidden">
     <div id="chat-header">
@@ -679,13 +527,13 @@
       <button id="send-button">Enviar</button>
     </div>
   </div>
-  
-  <!-- Scripts do Bootstrap -->
+
+  <!-- Script Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  
-  <!-- Script do Chatbot e ajustes dinâmicos -->
+
+  <!-- Script do Chatbot / Ajustes Dinâmicos -->
   <script>
-    // Função para adicionar mensagens ao chat
+    // Adiciona mensagens ao chat
     function addMessage(content, sender = 'bot') {
       const chatBody = document.getElementById('chat-messages');
       const message = document.createElement('div');
@@ -695,12 +543,12 @@
       chatBody.scrollTop = chatBody.scrollHeight;
     }
 
-    // Função para processar o texto (remove espaços laterais)
+    // Preprocessamento de texto
     function preprocessText(text) {
       return text.trim();
     }
 
-    // Função que define a saudação (com saudação e pergunta de ajuda)
+    // Saudação inicial (mantém comportamento original)
     function getGreeting() {
       const now = new Date();
       const hour = now.getHours();
@@ -716,12 +564,12 @@
       return greeting;
     }
 
-    // Exibe a mensagem de saudação ao carregar o DOM
+    // Ao carregar DOM, mostra saudação
     document.addEventListener("DOMContentLoaded", function() {
       addMessage(getGreeting(), "bot");
     });
 
-    // Função para enviar a mensagem do usuário e buscar resposta dinâmica
+    // Envio da mensagem do usuário
     async function sendMessage() {
       const input = document.getElementById('message-input');
       const userMessage = preprocessText(input.value);
@@ -732,7 +580,7 @@
       }
     }
 
-    // Função que processa a mensagem do usuário e busca uma resposta dinâmica
+    // Processa a mensagem do usuário e busca resposta (exemplo usando Lunr ou fallback)
     async function handleUserMessage(message) {
       try {
         const response = await getDynamicResponse(message);
@@ -743,7 +591,7 @@
       }
     }
 
-    // IMPLEMENTAÇÃO CORRIGIDA: Busca dinâmica utilizando a base de conhecimento e Lunr.js.
+    // Exemplo de busca dinâmica usando Lunr.js + JSON local
     async function getDynamicResponse(query) {
       if (!window.knowledgeBase) {
         try {
@@ -754,7 +602,7 @@
           return "Desculpe, ocorreu um erro ao carregar a base de conhecimento.";
         }
       }
-      
+
       if (!window.lunrIndex) {
         window.lunrIndex = lunr(function() {
           this.ref('id');
@@ -765,7 +613,7 @@
           }, this);
         });
       }
-      
+
       const results = window.lunrIndex.search(query);
       if (results.length > 0) {
         const firstResultRef = results[0].ref;
@@ -776,7 +624,7 @@
       }
     }
 
-    // Eventos para envio de mensagem
+    // Eventos de envio (Enter e Botão)
     document.getElementById('message-input').addEventListener('keydown', function(event) {
       if (event.key === 'Enter') {
         event.preventDefault();
@@ -789,9 +637,8 @@
     document.getElementById('chat-toggle').addEventListener('click', function() {
       const chatWidget = document.getElementById('chat-widget');
       const chatToggle = document.getElementById('chat-toggle');
-      if (chatWidget.style.display === 'none' || chatWidget.style.display === '') {
+      if (!chatWidget.style.display || chatWidget.style.display === 'none') {
         chatWidget.style.display = 'flex';
-        // Oculta o ícone do chatbot quando o chat é aberto
         chatToggle.style.display = 'none';
       } else {
         chatWidget.style.display = 'none';
@@ -809,12 +656,12 @@
       chatToggle.style.display = 'block';
     });
 
-    // Ajuste dinâmico para que o ícone do chatbot não ultrapasse o rodapé
+    // Ajuste para que o ícone do chatbot não se sobreponha ao rodapé
     window.addEventListener('scroll', function() {
       const chatToggle = document.getElementById('chat-toggle');
       const footer = document.querySelector('.custom-footer');
       const footerRect = footer.getBoundingClientRect();
-      const defaultBottom = 20; // 20px padrão
+      const defaultBottom = 20;
       if (footerRect.top < window.innerHeight) {
         const overlap = window.innerHeight - footerRect.top;
         chatToggle.style.bottom = (defaultBottom + overlap) + 'px';
@@ -823,13 +670,5 @@
       }
     });
   </script>
-
-  <style>
-    /* Estado minimizado: oculta mensagens e área de entrada */
-    #chat-widget.minimized #chat-messages,
-    #chat-widget.minimized #chat-input {
-      display: none;
-    }
-  </style>
 </body>
 </html>
