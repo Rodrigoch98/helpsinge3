@@ -24,14 +24,11 @@
     html, body {
       margin: 0;
       padding: 0;
-      /* Removemos o display flex e padding-bottom, voltando ao padrão */
     }
     body {
-      /* Reverte para a cor de fundo clara (ou branca padrão) e uso da fonte Montserrat para títulos (se desejar, ou em headings) */
-      background-color: #fff; /* ou a cor que estava no original */
-      color: #212529;         /* cor de texto padrão do Bootstrap */
-      font-family: sans-serif; 
-      /* Obs.: Se quiser que TODO o texto use Montserrat, substitua por: font-family: 'Montserrat', sans-serif; */
+      background-color: #fff;
+      color: #212529;
+      font-family: sans-serif;
     }
 
     /* ============================= */
@@ -47,39 +44,42 @@
     .navbar .nav-link.active {
       color: #EAF5F9;
     }
-    /* Mantemos as configurações de cor do navbar (bg-dark, etc.) através do Bootstrap classes */
     .navbar-toggler {
-      border-color: #C51631 !important; /* Cor primária caso queira destacar o ícone toggler */
+      border-color: #C51631 !important;
     }
 
     /* ============================= */
     /* 2. Header (Banner Principal) */
     /* ============================= */
-    header {
-      /* Reverte para margin/spacing original (por exemplo, py-5 ou my-5) */
+    header.py-5 {
+      /* Mantém spacing “py-5” do Bootstrap */
     }
-    header .row.align-items-center > .col-md-8 {
-      /* Removido o text-align forçado, volta ao comportamento bootstrap */
-    }
-    header .row.align-items-center > .col-md-4 {
-      /* Removido o text-align forçado, volta ao comportamento bootstrap */
-    }
-    /* Se quiser manter o espaçamento vertical amplo, use as classes do Bootstrap:
-       <header class="py-5"> ou <header class="my-5"> no HTML. */
-
-    /* Título principal usando a fonte Montserrat para destaque (opcional) */
     h1.display-4 {
-      font-family: 'Montserrat', sans-serif; /* grande, grosso, cor #212529 do bootstrap */
-      /* Se quiser forçar alguma cor, ex.: color: #212529; */
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* ======================================== */
+    /* AJUSTE PRINCIPAL: Título + Subtítulo + Logo Lado a Lado */
+    /* ======================================== */
+    .header-content-wrap {
+      display: flex;
+      flex-wrap: wrap;       /* Permite quebra em telas muito pequenas */
+      align-items: center;   /* Alinha verticalmente ao centro */
+      justify-content: start;/* Título+subtítulo e logo ficam alinhados à esquerda */
+      gap: 2rem;            /* Espaço entre texto e logo */
+    }
+    .header-text-wrap {
+      /* Envolve apenas o bloco do título e subtítulo */
+    }
+    .logo-wrap img {
+      max-width: 250px;
     }
 
     /* ============================= */
     /* 3. Seção de Cards / Home     */
     /* ============================= */
-    /* Mantemos as classes e estilos de card do snippet original, se houver algo no styles.css
-       Aqui, apenas removendo qualquer redefinição de cor/fonte que conflite. */
     .card-title {
-      font-family: 'Montserrat', sans-serif; /* mantém destaque no título */
+      font-family: 'Montserrat', sans-serif;
     }
 
     /* ============================= */
@@ -87,7 +87,7 @@
     /* ============================= */
     .custom-footer {
       background-color: #1A1A1A;
-      color: #f8f9fa; 
+      color: #f8f9fa;
       padding: 20px 0 10px 0;
       font-size: 0.9rem;
     }
@@ -110,7 +110,7 @@
       border: 1px solid #ccc;
       border-radius: 12px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      display: none; /* Começa oculto, será exibido no toggle */
+      display: none;
       flex-direction: column;
       overflow: hidden;
       z-index: 1200;
@@ -189,7 +189,6 @@
       border: none;
       cursor: pointer;
     }
-    /* Botão do Chat Toggle */
     #chat-toggle {
       position: fixed;
       bottom: 20px;
@@ -206,7 +205,6 @@
       width: 100%;
       height: 100%;
     }
-
     /* Estado minimizado: oculta as mensagens e a área de entrada */
     #chat-widget.minimized #chat-messages,
     #chat-widget.minimized #chat-input {
@@ -221,7 +219,7 @@
       <a class="navbar-brand" href="https://lincetec.com.br/">LINCE TECH</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span><!-- Ícone padrão do Bootstrap -->
+        <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
@@ -237,22 +235,24 @@
 
   <!-- Conteúdo Principal -->
   <main>
-    <!-- Banner Principal (retorno ao espaçamento original, por exemplo py-5) -->
+    <!-- Banner Principal -->
     <header class="py-5">
       <div class="container">
-        <div class="row align-items-center">
-          <!-- Bloco do título e subtítulo -->
-          <div class="col-md-8">
-            <!-- Título com display-4, cor e fonte bootstrap padrão -->
-            <h1 class="display-4" style="font-family: 'Montserrat', sans-serif;">HELP SINGE</h1>
-            <p class="lead">Acesso rápido às documentações de todas as áreas do Singe.</p>
-          </div>
-          <!-- Bloco da logo -->
-          <div class="col-md-4 text-md-end">
-            <a href="https://lincetec.com.br/">
-              <img src="https://lincetec.com.br/wp-content/uploads/2023/06/logo-lince-tipografia.png" 
-                   alt="Lince Tech Logo" class="img-fluid" style="max-width: 250px;">
-            </a>
+        <div class="row">
+          <!-- Ajuste: título, subtítulo e logo juntos em UMA col -->
+          <div class="col-md-12">
+            <div class="header-content-wrap">
+              <div class="header-text-wrap">
+                <h1 class="display-4">HELP SINGE</h1>
+                <p class="lead">Acesso rápido às documentações de todas as áreas do Singe.</p>
+              </div>
+              <div class="logo-wrap">
+                <a href="https://lincetec.com.br/">
+                  <img src="https://lincetec.com.br/wp-content/uploads/2023/06/logo-lince-tipografia.png" 
+                       alt="Lince Tech Logo">
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -548,7 +548,7 @@
       return text.trim();
     }
 
-    // Saudação inicial (mantém comportamento original)
+    // Saudação inicial
     function getGreeting() {
       const now = new Date();
       const hour = now.getHours();
@@ -564,12 +564,10 @@
       return greeting;
     }
 
-    // Ao carregar DOM, mostra saudação
     document.addEventListener("DOMContentLoaded", function() {
       addMessage(getGreeting(), "bot");
     });
 
-    // Envio da mensagem do usuário
     async function sendMessage() {
       const input = document.getElementById('message-input');
       const userMessage = preprocessText(input.value);
@@ -580,7 +578,6 @@
       }
     }
 
-    // Processa a mensagem do usuário e busca resposta (exemplo usando Lunr ou fallback)
     async function handleUserMessage(message) {
       try {
         const response = await getDynamicResponse(message);
@@ -591,7 +588,6 @@
       }
     }
 
-    // Exemplo de busca dinâmica usando Lunr.js + JSON local
     async function getDynamicResponse(query) {
       if (!window.knowledgeBase) {
         try {
@@ -624,7 +620,6 @@
       }
     }
 
-    // Eventos de envio (Enter e Botão)
     document.getElementById('message-input').addEventListener('keydown', function(event) {
       if (event.key === 'Enter') {
         event.preventDefault();
@@ -633,7 +628,6 @@
     });
     document.getElementById('send-button').addEventListener('click', sendMessage);
 
-    // Eventos para abrir, minimizar e fechar o chat
     document.getElementById('chat-toggle').addEventListener('click', function() {
       const chatWidget = document.getElementById('chat-widget');
       const chatToggle = document.getElementById('chat-toggle');
@@ -656,7 +650,6 @@
       chatToggle.style.display = 'block';
     });
 
-    // Ajuste para que o ícone do chatbot não se sobreponha ao rodapé
     window.addEventListener('scroll', function() {
       const chatToggle = document.getElementById('chat-toggle');
       const footer = document.querySelector('.custom-footer');
