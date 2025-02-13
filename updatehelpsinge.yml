@@ -1,0 +1,38 @@
+name: "Atualizar HelpSinge"
+
+on:
+  schedule:
+    - cron: "0 3 * * *"  # todo dia às 03:00 UTC
+  workflow_dispatch:  # permite rodar manualmente
+
+jobs:
+  update-helpsinge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: |
+          npm install axios cheerio
+
+      - name: Run scraper
+        run: |
+          node src/scrapHelpsinge.js
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/knowledgeBase.json
+          git commit -m "Update knowledgeBase.json [skip ci]" || echo "No changes to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
