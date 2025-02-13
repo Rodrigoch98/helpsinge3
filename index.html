@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HELP SINGE - Home</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Lordicon -->
+  <script src="https://cdn.lordicon.com/lordicon.js"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Lunr.js (opcional) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js"></script>
+  <!-- Font Awesome para os ícones das redes sociais -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="https://lincetec.com.br/">LINCE TECH</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- Ícone de “hamburger” padrão do Bootstrap -->
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="documentacao.html">Documentação</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://lincetec.com.br/nossa-historia/">Nossa História</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://lincetec.com.br/#singe">Conheça nosso ERP</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://lincetec.com.br/contato/">Contato</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Conteúdo Principal -->
+  <main>
+    <!-- Banner Principal -->
+    <header class="py-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <!-- Bloco do título e subtítulo (alinhado à esquerda) -->
+          <div class="col-md-8">
+            <h1 class="display-4">HELP SINGE</h1>
+            <p class="lead">Acesso rápido às documentações de todas as áreas do Singe.</p>
+          </div>
+          <!-- Bloco da logo (alinhado à direita) -->
+          <div class="col-md-4">
+            <a href="https://lincetec.com.br/">
+              <img src="https://lincetec.com.br/wp-content/uploads/2023/06/logo-lince-tipografia.png" 
+                   alt="Lince Tech Logo" class="img-fluid" style="max-width: 250px;">
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <!-- Seção de Cards (Home) -->
+    <section class="pt-2 pb-5">
+      <div class="container">
+        <div class="row text-center">
+          <!-- Card 1: Comercial -->
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <lord-icon src="https://cdn.lordicon.com/fcyboqbm.json" trigger="hover"
+                           colors="primary:#000000,secondary:#c71f16"
+                           style="width:100px;height:100px"></lord-icon>
+                <h5 class="card-title">Comercial</h5>
+                <a href="https://helpsinge.lince.com.br/comercial.html" class="btn btn-primary">Acessar</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 2: Contabilidade -->
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <lord-icon src="https://cdn.lordicon.com/fqbvgezn.json" trigger="hover"
+                           colors="primary:#000000,secondary:#c71f16"
+                           style="width:100px;height:100px"></lord-icon>
+                <h5 class="card-title">Contabilidade</h5>
+                <a href="https://helpsinge.lince.com.br/contabilidade.html" class="btn btn-primary">Acessar</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 3: Custos -->
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <lord-icon src="https://cdn.lordicon.com/ytklkgsc.json" trigger="hover"
+                           colors="primary:#000000,secondary:#c71f16"
+                           style="width:100px;height:100px"></lord-icon>
+                <h5 class="card-title">Custos</h5>
+                <a href="https://helpsinge.lince.com.br/custos.html" class="btn btn-primary">Acessar</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 4: Financeiro -->
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <lord-icon src="https://cdn.lordicon.com/bsdkzyjd.json" trigger="hover"
+                           colors="primary:#000000,secondary:#c71f16"
+                           style="width:100px;height:100px"></lord-icon>
+                <h5 class="card-title">Financeiro</h5>
+                <a href="https://helpsinge.lince.com.br/financeiro.html" class="btn btn-primary">Acessar</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 5: Internacionalização -->
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <lord-icon src="https://cdn.lordicon.com/rpviwvwn.json" trigger="hover"
+                           colors="primary:#000000,secondary:#c71f16"
+                           style="width:100px;height:100px"></lord-icon>
+                <h5 class="card-title">Internacionalização</h5>
+                <a href="https://helpsinge.lince.com.br/internacionalizacao.html" class="btn btn-primary">Acessar</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 6: Lince Shop -->
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <lord-icon src="https://cdn.lordicon.com/jprtoagx.json" trigger="hover"
+                           colors="primary:#000000,secondary:#c71f16"
+                           style="width:100px;height:100px"></lord-icon>
+                <h5 class="card-title">Lince Shop</h5>
+                <a href="https://helpsinge.lince.com.br/venda_a_funcionarios.html" class="btn btn-primary">Acessar</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 7: Logística -->
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <lord-icon src="https://cdn.lordicon.com/zzjjvkam.json" trigger="hover"
+                           colors="primary:#000000,secondary:#c71f16"
+                           style="width:100px;height:100px"></lord-icon>
+                <h5 class="card-title">Logística</h5>
+                <a href="https://helpsinge.lince.com.br/transporte_logistica.html" class="btn btn-primary">Acessar</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 8: Manutenção -->
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <lord-icon src="https://cdn.lordicon.com/fwkrbvja.json" trigger="hover"
+                           colors="primary:#c71f16,secondary:#000000"
+                           style="width:100px;height:100px"></lord-icon>
+                <h5 class="card-title">Manutenção</h5>
+                <a href="https://helpsinge.lince.com.br/manutencao.html" class="btn btn-primary">Acessar</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 9: Marketing -->
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <lord-icon src="https://cdn.lordicon.com/ozlkyfxg.json" trigger="hover"
+                           colors="primary:#c71f16,secondary:#000000"
+                           style="width:100px;height:100px"></lord-icon>
+                <h5 class="card-title">Marketing</h5>
+                <a href="https://helpsinge.lince.com.br/marketing.html" class="btn btn-primary">Acessar</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 10: P.O. -->
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <lord-icon src="https://cdn.lordicon.com/fikcyfpp.json" trigger="hover"
+                           colors="primary:#c71f16,secondary:#000000"
+                           style="width:100px;height:100px"></lord-icon>
+                <h5 class="card-title">P.O.</h5>
+                <a href="https://helpsinge.lince.com.br/plano_operacional.html" class="btn btn-primary">Acessar</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 11: Produção -->
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <lord-icon src="https://cdn.lordicon.com/ncmnezgk.json" trigger="hover"
+                           colors="primary:#c71f16,secondary:#000000"
+                           style="width:100px;height:100px"></lord-icon>
+                <h5 class="card-title">Produção</h5>
+                <a href="https://helpsinge.lince.com.br/gestao_da_producao.html" class="btn btn-primary">Acessar</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 12: Qualidade -->
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <lord-icon src="https://cdn.lordicon.com/edcgvlnw.json" trigger="hover"
+                           colors="primary:#c71f16,secondary:#000000"
+                           style="width:100px;height:100px"></lord-icon>
+                <h5 class="card-title">Qualidade</h5>
+                <a href="https://helpsinge.lince.com.br/gestao_da_qualidade.html" class="btn btn-primary">Acessar</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 13: RH -->
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <lord-icon src="https://cdn.lordicon.com/jdgfsfzr.json" trigger="hover"
+                           colors="primary:#c71f16,secondary:#000000"
+                           style="width:100px;height:100px"></lord-icon>
+                <h5 class="card-title">RH</h5>
+                <a href="https://helpsinge.lince.com.br/rh.html" class="btn btn-primary">Acessar</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 14: Suprimentos -->
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <lord-icon src="https://cdn.lordicon.com/kezeezyg.json" trigger="hover"
+                           colors="primary:#c71f16,secondary:#000000"
+                           style="width:100px;height:100px"></lord-icon>
+                <h5 class="card-title">Suprimentos</h5>
+                <a href="https://helpsinge.lince.com.br/suprimentos.html" class="btn btn-primary">Acessar</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 15: Suporte -->
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <lord-icon src="https://cdn.lordicon.com/ogjpwrxe.json" trigger="hover"
+                           colors="primary:#c71f16,secondary:#000000"
+                           style="width:100px;height:100px"></lord-icon>
+                <h5 class="card-title">Suporte</h5>
+                <a href="https://helpsinge.lince.com.br/suporte.html" class="btn btn-primary">Acessar</a>
+              </div>
+            </div>
+          </div>
+        </div><!-- .row -->
+      </div><!-- .container -->
+    </section>
+  </main>
+  
+  <!-- Rodapé -->
+  <footer class="custom-footer">
+    <div class="container">
+      <div class="row">
+        <!-- Coluna 1: Contato e Redes Sociais (alinhado à esquerda) -->
+        <div class="col-md-4 text-start mb-3 footer-contact">
+          <h3>Contato</h3>
+          <p><a href="mailto:crm.lince@lince.com.br">crm.lince@lince.com.br</a></p>
+          <div class="footer-social-inside mt-3">
+            <p class="footer-social-title"><strong>Nos acompanhe nas redes sociais:</strong></p>
+            <p>
+              <a href="https://www.instagram.com/lincetech/" target="_blank">
+                <i class="fab fa-instagram"></i> @lincetech
+              </a>
+            </p>
+            <p>
+              <a href="https://www.linkedin.com/company/lincetec" target="_blank">
+                <i class="fab fa-linkedin"></i> Lince Participações e Empreendimentos
+              </a>
+            </p>
+            <p style="margin-top:20px;">
+              <a href="https://lincetec.com.br/privacy-policy/" target="_self">Política de Privacidade</a>
+            </p>
+          </div>
+        </div>
+        <!-- Coluna 2: Onde estamos (alinhado à esquerda) -->
+        <div class="col-md-4 text-start mb-3 footer-location">
+          <h3>Onde estamos</h3>
+          <p style="margin-bottom: 0;">Rua Dr. Nereu Ramos, n° 750 Coloninha, Gaspar SC</p>
+          <p style="margin-top: 5px;">Cep: 89110-110</p>
+        </div>
+        <!-- Coluna 3: Localização (alinhado à esquerda) -->
+        <div class="col-md-4 text-start mb-3 footer-map">
+          <h3>Localização</h3>
+          <iframe 
+            src="https://www.google.com/maps?q=Rua+Dr.+Nereu+Ramos,+750,+Coloninha,+Gaspar,+SC,+89110-110&output=embed"
+            width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy">
+          </iframe>
+        </div>
+      </div>
+      <!-- Footer Bottom: logotipo à esquerda e direitos reservados à direita -->
+      <div class="row mt-3 footer-bottom">
+        <div class="col-md-6 text-start">
+          <a href="https://lincetec.com.br/">
+            <img src="https://lincetec.com.br/wp-content/uploads/2023/06/logo-lince-tipografia.png" alt="Lince Tech" class="logo-bottom">
+          </a>
+        </div>
+        <div class="col-md-6 text-end">
+          <p>&copy; 2025 LINCE TECH. Todos os direitos reservados.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Botão de toggle do Chat (ícone animado) -->
+  <button id="chat-toggle">
+    <lord-icon
+      src="https://cdn.lordicon.com/ecngpoqo.json"
+      trigger="hover"
+      colors="primary:#c71f16,secondary:#000000"
+      style="width:100%; height:100%;">
+    </lord-icon>
+  </button>
+  
+  <!-- Widget do Chat -->
+  <div id="chat-widget" class="chat-hidden">
+    <div id="chat-header">
+      <span>Chat</span>
+      <div class="chat-header-buttons">
+        <button id="chat-minimize">_</button>
+        <button id="chat-close">X</button>
+      </div>
+    </div>
+    <div id="chat-messages"></div>
+    <div id="chat-input">
+      <input id="message-input" type="text" placeholder="Digite sua mensagem...">
+      <button id="send-button">Enviar</button>
+    </div>
+  </div>
+  
+  <!-- Scripts do Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Script do Chatbot e ajustes dinâmicos -->
+  <script>
+    // Função para adicionar mensagens ao chat
+    function addMessage(content, sender = 'bot') {
+      const chatBody = document.getElementById('chat-messages');
+      const message = document.createElement('div');
+      message.classList.add('chat-message', sender);
+      message.innerHTML = content;
+      chatBody.appendChild(message);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    // Função para processar o texto (remove espaços laterais)
+    function preprocessText(text) {
+      return text.trim();
+    }
+
+    // Função que define a saudação (com saudação e pergunta de ajuda)
+    function getGreeting() {
+      const now = new Date();
+      const hour = now.getHours();
+      const lang = navigator.language || 'pt-BR';
+      let greeting = "";
+      if (lang.toLowerCase().startsWith("en")) {
+        greeting = hour < 12 ? "Good morning!" : hour < 18 ? "Good afternoon!" : "Good evening!";
+        greeting += " How can I help you today? What is your question?";
+      } else {
+        greeting = hour < 12 ? "Bom dia!" : hour < 18 ? "Boa tarde!" : "Boa noite!";
+        greeting += " Como podemos ajudar? Qual é a sua dúvida?";
+      }
+      return greeting;
+    }
+
+    // Exibe a mensagem de saudação ao carregar o DOM
+    document.addEventListener("DOMContentLoaded", function() {
+      addMessage(getGreeting(), "bot");
+    });
+
+    // Função para enviar a mensagem do usuário e buscar resposta dinâmica
+    async function sendMessage() {
+      const input = document.getElementById('message-input');
+      const userMessage = preprocessText(input.value);
+      if (userMessage) {
+        addMessage(userMessage, 'user');
+        input.value = '';
+        handleUserMessage(userMessage);
+      }
+    }
+
+    // Função que processa a mensagem do usuário e busca uma resposta dinâmica
+    async function handleUserMessage(message) {
+      try {
+        const response = await getDynamicResponse(message);
+        addMessage(response, "bot");
+      } catch (error) {
+        console.error("Erro no processamento:", error);
+        addMessage("Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente.", "bot");
+      }
+    }
+
+    // IMPLEMENTAÇÃO CORRIGIDA: Busca dinâmica utilizando a base de conhecimento e Lunr.js.
+    async function getDynamicResponse(query) {
+      if (!window.knowledgeBase) {
+        try {
+          const response = await fetch('knowledgeBase.json');
+          window.knowledgeBase = await response.json();
+        } catch (error) {
+          console.error('Erro ao carregar knowledgeBase.json:', error);
+          return "Desculpe, ocorreu um erro ao carregar a base de conhecimento.";
+        }
+      }
+      
+      if (!window.lunrIndex) {
+        window.lunrIndex = lunr(function() {
+          this.ref('id');
+          this.field('title');
+          this.field('content');
+          window.knowledgeBase.forEach(function(doc) {
+            this.add(doc);
+          }, this);
+        });
+      }
+      
+      const results = window.lunrIndex.search(query);
+      if (results.length > 0) {
+        const firstResultRef = results[0].ref;
+        const doc = window.knowledgeBase.find(item => item.id === firstResultRef);
+        return doc ? doc.content : "Desculpe, não encontrei uma resposta para sua dúvida.";
+      } else {
+        return "Desculpe, não encontrei uma resposta para sua dúvida.";
+      }
+    }
+
+    // Eventos para envio de mensagem
+    document.getElementById('message-input').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        sendMessage();
+      }
+    });
+    document.getElementById('send-button').addEventListener('click', sendMessage);
+
+    // Eventos para abrir, minimizar e fechar o chat
+    document.getElementById('chat-toggle').addEventListener('click', function() {
+      const chatWidget = document.getElementById('chat-widget');
+      const chatToggle = document.getElementById('chat-toggle');
+      if (chatWidget.style.display === 'none' || chatWidget.style.display === '') {
+        chatWidget.style.display = 'flex';
+        // Oculta o ícone do chatbot quando o chat é aberto
+        chatToggle.style.display = 'none';
+      } else {
+        chatWidget.style.display = 'none';
+        chatToggle.style.display = 'block';
+      }
+    });
+    document.getElementById('chat-minimize').addEventListener('click', function() {
+      const chatWidget = document.getElementById('chat-widget');
+      chatWidget.classList.toggle('minimized');
+    });
+    document.getElementById('chat-close').addEventListener('click', function() {
+      const chatWidget = document.getElementById('chat-widget');
+      const chatToggle = document.getElementById('chat-toggle');
+      chatWidget.style.display = 'none';
+      chatToggle.style.display = 'block';
+    });
+
+    // Ajuste dinâmico para que o ícone do chatbot não ultrapasse o rodapé
+    window.addEventListener('scroll', function() {
+      const chatToggle = document.getElementById('chat-toggle');
+      const footer = document.querySelector('.custom-footer');
+      const footerRect = footer.getBoundingClientRect();
+      const defaultBottom = 20; // 20px padrão
+      if (footerRect.top < window.innerHeight) {
+        const overlap = window.innerHeight - footerRect.top;
+        chatToggle.style.bottom = (defaultBottom + overlap) + 'px';
+      } else {
+        chatToggle.style.bottom = defaultBottom + 'px';
+      }
+    });
+  </script>
+
+  <style>
+    /* Estado minimizado: oculta mensagens e área de entrada */
+    #chat-widget.minimized #chat-messages,
+    #chat-widget.minimized #chat-input {
+      display: none;
+    }
+  </style>
+  
+</body>
+</html>
