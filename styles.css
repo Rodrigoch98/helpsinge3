@@ -56,13 +56,12 @@ body {
 .navbar .nav-link.active {
   color: #EAF5F9;
 }
-.navbar-toggler {
-  border-color: var(--color-primary) !important;
-}
-/* Voltando ao ícone default do Bootstrap (removendo imagem customizada) */
-.navbar-toggler-icon {
-  /* Ícone padrão do Bootstrap, sem sobrescrever */
-}
+ .navbar-toggler {
+      border-color: var(--color-primary) !important;
+    }
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='var(--color-primary)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
 
 /* ============================= */
 /* 2. Header (Banner Principal) */
