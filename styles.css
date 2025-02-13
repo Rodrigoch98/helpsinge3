@@ -1,0 +1,335 @@
+/* ================================================== */
+/*                Variáveis de Cores                  */
+/* ================================================== */
+:root {
+  --color-primary: #C51631; /* vermelho */
+  --color-primary-dark: #A3102A;
+  --color-dark: #1A1A1A;
+  --color-light: #FFFCF8; /* fundo atualizado */
+  --color-text: #333333;
+  --color-border: #ABB8C3;
+
+  --transition-speed: 0.3s;
+  --box-shadow-base: 0 4px 8px rgba(0, 0, 0, 0.05);
+  --box-shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.1);
+
+  --card-hover-color: #f2f2f2; /* Cinza claro */
+}
+
+/* ============================= */
+/* 0. Sticky Footer Setup       */
+/* ============================= */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  /* Caso queira maior espaço para o chatbot, ajuste aqui: */
+  padding-bottom: 150px;
+}
+main {
+  flex: 1;
+}
+
+/* ============================= */
+/* 1. Global Styles             */
+/* ============================= */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: var(--color-light);
+  color: var(--color-text);
+}
+
+/* ============================= */
+/* 2. Navbar                    */
+/* ============================= */
+.navbar {
+  background-color: var(--color-dark);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.navbar .navbar-brand {
+  color: var(--color-light);
+  font-weight: bold;
+  text-decoration: none;
+}
+.navbar .navbar-brand:hover {
+  color: var(--color-primary) !important;
+}
+.navbar .nav-link {
+  color: var(--color-light);
+  transition: color var(--transition-speed);
+}
+.navbar .nav-link:hover {
+  color: var(--color-primary) !important;
+}
+.navbar .nav-link.active {
+  color: #EAF5F9;
+}
+.navbar-toggler {
+  border-color: var(--color-primary) !important;
+}
+/* Removido o custom background-image para o navbar-toggler-icon, voltamos ao default do Bootstrap */
+
+/* ============================= */
+/* 3. Header (Banner Principal) */
+/* ============================= */
+header .row.align-items-center > .col-md-8 {
+  text-align: left !important;
+}
+header .row.align-items-center > .col-md-4 {
+  text-align: right !important;
+}
+header .container,
+section .container {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* ============================= */
+/* 4. Seção Geral               */
+/* ============================= */
+section {
+  background-color: var(--color-light);
+  padding: 50px 0;
+}
+@media (max-width: 576px) {
+  section {
+    padding: 30px 0;
+  }
+}
+
+/* ============================= */
+/* 5. Cards de Documentação/Home */
+/* ============================= */
+.card {
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background-color: var(--color-light);
+  color: var(--color-text);
+  box-shadow: var(--box-shadow-base);
+  margin-bottom: 1rem;
+}
+.card-body {
+  padding: 20px;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--box-shadow-hover);
+  background-color: var(--card-hover-color) !important;
+}
+.card-body i {
+  transition: transform var(--transition-speed) ease;
+}
+.card:hover i {
+  transform: scale(1.1);
+}
+.card i.text-primary {
+  color: var(--color-primary) !important;
+}
+.card a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ============================= */
+/* 6. Botões “Acessar”          */
+/* ============================= */
+.btn-primary {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary-dark) !important;
+  color: #fff !important;
+}
+.btn-primary:hover {
+  background-color: var(--color-light) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+}
+
+/* ============================= */
+/* 7. Custom Footer             */
+/* ============================= */
+.custom-footer {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  padding: 20px 0 10px 0;
+  font-size: 0.9rem;
+}
+.custom-footer a {
+  color: var(--color-light);
+  text-decoration: none;
+}
+.custom-footer a:hover {
+  color: var(--color-primary);
+}
+.custom-footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+.footer-contact,
+.footer-location,
+.footer-map {
+  text-align: left !important;
+}
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between; 
+  border-top: 1px solid #333;
+  padding-top: 10px;
+  margin-top: 20px;
+}
+.footer-bottom .col-md-6:first-child {
+  text-align: left;
+}
+.footer-bottom .col-md-6:last-child {
+  text-align: right;
+}
+.footer-bottom .logo-bottom {
+  max-width: 150px;
+  height: auto;
+  margin: 0 auto;
+}
+.footer-social-inside p {
+  margin: 5px 0;
+}
+.footer-social-inside i {
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+/* ============================= */
+/* 8. Formulários               */
+/* ============================= */
+.form-label {
+  color: var(--color-text);
+}
+.form-control {
+  background-color: var(--color-light);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+.form-control:focus {
+  border-color: var(--color-primary);
+  box-shadow: none;
+}
+
+/* ============================= */
+/* 9. Ícone no Botão "Acessar"   */
+/* ============================= */
+.acessar-icon {
+  color: var(--color-primary);
+}
+
+/* ============================= */
+/* 10. Chat Widget (Modernizado)  */
+/* ============================= */
+#chat-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 400px;
+  max-height: 500px;
+  background: var(--color-light);
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  z-index: 1100;
+}
+#chat-widget.chat-hidden {
+  display: none;
+}
+#chat-widget.minimized #chat-messages,
+#chat-widget.minimized #chat-input {
+  display: none;
+}
+#chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: linear-gradient(45deg, #c71f16, #000000);
+  color: #fff;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.chat-header-buttons {
+  display: flex;
+  gap: 10px;
+}
+#chat-header button {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 5px;
+}
+#chat-messages {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  background: #f9f9f9;
+}
+#chat-messages .chat-message {
+  padding: 8px;
+  border-radius: 4px;
+  max-width: 80%;
+  word-wrap: break-word;
+  margin-bottom: 8px;
+}
+.chat-message.user {
+  background: var(--color-primary);
+  color: var(--color-light);
+  align-self: flex-end;
+}
+.chat-message.bot {
+  background: #e0e0e0;
+  color: var(--color-text);
+  align-self: flex-start;
+}
+#chat-input {
+  display: flex;
+  border-top: 1px solid #ccc;
+}
+#chat-input input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  outline: none;
+}
+#chat-input button {
+  padding: 10px 15px;
+  background: #C51631;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+/* Botão do Chat Toggle */
+#chat-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  cursor: pointer;
+  z-index: 1000;
+}
+#chat-toggle lord-icon {
+  width: 100%;
+  height: 100%;
+}
