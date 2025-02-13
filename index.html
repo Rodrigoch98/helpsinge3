@@ -17,7 +17,7 @@
   <!-- Font Awesome para os ícones das redes sociais -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-   <style>
+  <style>
     /* ================================================== */
     /*                Variáveis de Cores                  */
     /* ================================================== */
@@ -25,7 +25,7 @@
       --color-primary: #C51631; /* vermelho */
       --color-primary-dark: #A3102A;
       --color-dark: #1A1A1A;
-      --color-light: #FFFCF8; /* Cor de fundo atualizada */
+      --color-light: #ffffff; /* fundo volta ao branco */
       --color-text: #333333;
       --color-border: #ABB8C3;
 
@@ -37,33 +37,21 @@
     }
 
     /* ============================= */
-    /* 0. Sticky Footer Setup       */
+    /* 0. Global / Reset            */
     /* ============================= */
     html, body {
-      height: 100%;
+      height: auto;
       margin: 0;
       padding: 0;
     }
     body {
-      display: flex;
-      flex-direction: column;
-      /* Adiciona padding inferior para evitar que o chatbot se sobreponha ao rodapé */
-      padding-bottom: 150px;
       font-family: 'Arial', sans-serif;
       background-color: var(--color-light);
       color: var(--color-text);
     }
-    main {
-      flex: 1;
-    }
 
     /* ============================= */
-    /* 1. Global Styles             */
-    /* ============================= */
-    /* (Já definido acima, apenas consolidamos) */
-
-    /* ============================= */
-    /* 2. Navbar                    */
+    /* 1. Navbar                    */
     /* ============================= */
     .navbar {
       background-color: var(--color-dark);
@@ -90,34 +78,40 @@
     .navbar-toggler {
       border-color: var(--color-primary) !important;
     }
-    /* Removemos a regra de background-image para usar o ícone padrão do Bootstrap */
+    /* Ícone padrão do Bootstrap */
     .navbar-toggler-icon {
-      /* Deixe sem sobrescrever o background-image para exibir as 3 linhas padrão */
+      /* Usando o ícone default sem sobrescrever */
     }
 
     /* ============================= */
-    /* 3. Header (Banner Principal) */
+    /* 2. Header (Banner Principal) */
     /* ============================= */
-    /* Alinha o título à esquerda, conforme solicitado */
-    header .row.align-items-center > .col-md-8 {
-      text-align: left !important;
+    header,
+    header.bg-primary {
+      background-color: var(--color-light) !important;
+      color: var(--color-primary) !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0;
     }
-    header .row.align-items-center > .col-md-4 {
-      text-align: right !important;
+    header .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem 0;
+      width: 100%;
     }
-    
-    /* Alinhamento consistente para cabeçalho e cards */
-    header .container,
-    section .container {
-      max-width: 1140px;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 15px;
-      padding-right: 15px;
+    header .display-4,
+    header .lead {
+      margin: 0.1rem 0;
+      font-family: 'Montserrat', sans-serif !important;
+      color: var(--color-primary) !important;
     }
 
     /* ============================= */
-    /* 4. Seção Geral               */
+    /* 3. Seção Geral               */
     /* ============================= */
     section {
       background-color: var(--color-light);
@@ -130,7 +124,7 @@
     }
 
     /* ============================= */
-    /* 5. Cards de Documentação/Home */
+    /* 4. Cards de Documentação/Home */
     /* ============================= */
     .card {
       transition: transform var(--transition-speed), box-shadow var(--transition-speed);
@@ -165,7 +159,7 @@
     }
 
     /* ============================= */
-    /* 6. Botões “Acessar”          */
+    /* 5. Botões “Acessar”          */
     /* ============================= */
     .btn-primary {
       background-color: var(--color-primary) !important;
@@ -179,7 +173,7 @@
     }
 
     /* ============================= */
-    /* 7. Custom Footer             */
+    /* 6. Custom Footer             */
     /* ============================= */
     .custom-footer {
       background-color: var(--color-dark);
@@ -208,7 +202,7 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      justify-content: space-between;
+      justify-content: space-between; 
       border-top: 1px solid #333;
       padding-top: 10px;
       margin-top: 20px;
@@ -233,7 +227,7 @@
     }
 
     /* ============================= */
-    /* 8. Formulários               */
+    /* 7. Formulários               */
     /* ============================= */
     .form-label {
       color: var(--color-text);
@@ -249,29 +243,28 @@
     }
 
     /* ============================= */
-    /* 9. Ícone no Botão "Acessar"   */
+    /* 8. Ícone no Botão "Acessar"   */
     /* ============================= */
     .acessar-icon {
       color: var(--color-primary);
     }
 
     /* ============================= */
-    /* 10. Chat Widget (Modernizado)  */
+    /* 9. Chat Widget (Modernizado)  */
     /* ============================= */
     #chat-widget {
       position: fixed;
-      bottom: 20px; /* valor padrão, reajustado via JS ao rolar a página */
+      bottom: 20px;
       right: 20px;
-      width: 300px;
-      max-height: 400px;
-      background: #fff;
+      width: 400px;
+      max-height: 500px;
+      background: var(--color-light);
       border: 1px solid #ccc;
       border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
       display: flex;
       flex-direction: column;
-      overflow: hidden;
-      z-index: 1200;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      z-index: 1100;
     }
     #chat-widget.chat-hidden {
       display: none;
@@ -298,37 +291,32 @@
       background: transparent;
       border: none;
       color: #fff;
-      font-size: 18px;
+      font-size: 16px;
       cursor: pointer;
+      padding: 0 5px;
     }
     #chat-messages {
       flex: 1;
-      padding: 10px;
+      padding: 12px;
       overflow-y: auto;
       background: #f9f9f9;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
     }
-    .chat-message {
-      padding: 10px;
-      border-radius: 10px;
+    #chat-messages .chat-message {
+      padding: 8px;
+      border-radius: 4px;
       max-width: 80%;
       word-wrap: break-word;
+      margin-bottom: 8px;
+    }
+    .chat-message.user {
+      background: var(--color-primary);
+      color: var(--color-light);
+      align-self: flex-end;
     }
     .chat-message.bot {
       background: #e0e0e0;
-      color: #333;
+      color: var(--color-text);
       align-self: flex-start;
-      margin-left: 10px;
-      margin-right: auto;
-    }
-    .chat-message.user {
-      background: #c51631;
-      color: #fff;
-      align-self: flex-end;
-      margin-right: 10px;
-      margin-left: auto;
     }
     #chat-input {
       display: flex;
@@ -336,8 +324,8 @@
     }
     #chat-input input {
       flex: 1;
-      padding: 10px;
       border: none;
+      padding: 10px;
       outline: none;
     }
     #chat-input button {
@@ -350,7 +338,7 @@
     /* Botão do Chat Toggle */
     #chat-toggle {
       position: fixed;
-      bottom: 20px; /* valor padrão, reajustado via JS */
+      bottom: 20px;
       right: 20px;
       background: transparent;
       border: none;
@@ -358,7 +346,7 @@
       width: 120px;
       height: 120px;
       cursor: pointer;
-      z-index: 1001;
+      z-index: 1000;
     }
     #chat-toggle lord-icon {
       width: 100%;
@@ -373,7 +361,6 @@
       <a class="navbar-brand" href="https://lincetec.com.br/">LINCE TECH</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <!-- O ícone padrão do Bootstrap será usado aqui -->
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
@@ -410,7 +397,7 @@
       </div>
     </header>
     
-    <!-- Seção de Cards (Home) -->
+     <!-- Seção de Cards (Home) -->
     <section class="pt-2 pb-5">
       <div class="container">
         <div class="row text-center">
@@ -639,7 +626,7 @@
           </iframe>
         </div>
       </div>
-      <!-- Footer Bottom: logotipo à esquerda e direitos reservados à direita -->
+      <!-- Footer Bottom -->
       <div class="row mt-3 footer-bottom">
         <div class="col-md-6 text-start">
           <a href="https://lincetec.com.br/">
@@ -682,7 +669,7 @@
   <!-- Scripts do Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   
-  <!-- Script do Chatbot e ajustes dinâmicos -->
+  <!-- Script do Chatbot -->
   <script>
     // Função para adicionar mensagens ao chat
     function addMessage(content, sender = 'bot') {
@@ -699,7 +686,7 @@
       return text.trim();
     }
 
-    // Função que define a saudação (com saudação e pergunta de ajuda)
+    // Função que define a saudação
     function getGreeting() {
       const now = new Date();
       const hour = now.getHours();
@@ -715,12 +702,12 @@
       return greeting;
     }
 
-    // Exibe a mensagem de saudação ao carregar o DOM
+    // Exibe a saudação ao carregar o DOM
     document.addEventListener("DOMContentLoaded", function() {
       addMessage(getGreeting(), "bot");
     });
 
-    // Função para enviar a mensagem do usuário e buscar resposta dinâmica
+    // Função para enviar a mensagem do usuário
     async function sendMessage() {
       const input = document.getElementById('message-input');
       const userMessage = preprocessText(input.value);
@@ -731,7 +718,7 @@
       }
     }
 
-    // Função que processa a mensagem do usuário e busca uma resposta dinâmica
+    // Processa a mensagem do usuário e busca resposta dinâmica
     async function handleUserMessage(message) {
       try {
         const response = await getDynamicResponse(message);
@@ -742,11 +729,12 @@
       }
     }
 
-    // IMPLEMENTAÇÃO CORRIGIDA: Busca dinâmica utilizando a base de conhecimento e Lunr.js.
+    // IMPLEMENTAÇÃO: Busca dinâmica utilizando a base de conhecimento e Lunr.js.
     async function getDynamicResponse(query) {
       if (!window.knowledgeBase) {
         try {
-          const response = await fetch('knowledgeBase.json');
+          // Atualização: utiliza o caminho correto para o arquivo gerado pelo scraper
+          const response = await fetch('src/knowledgeBase.json');
           window.knowledgeBase = await response.json();
         } catch (error) {
           console.error('Erro ao carregar knowledgeBase.json:', error);
@@ -790,7 +778,6 @@
       const chatToggle = document.getElementById('chat-toggle');
       if (chatWidget.style.display === 'none' || chatWidget.style.display === '') {
         chatWidget.style.display = 'flex';
-        // Oculta o ícone do chatbot quando o chat é aberto
         chatToggle.style.display = 'none';
       } else {
         chatWidget.style.display = 'none';
@@ -830,6 +817,5 @@
       display: none;
     }
   </style>
-  
 </body>
 </html>
