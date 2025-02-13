@@ -77,12 +77,13 @@ header .row.align-items-center > .col-md-4 {
 }
 header .container,
 section .container {
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-top: 50px;
+      color-text: #C51631;
+      max-width: 1140px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 15px;
+      padding-right: 15px;
+      margin-top: 50px;
 }
 
 /* ============================= */
