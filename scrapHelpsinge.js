@@ -3220,7 +3220,7 @@ const knowledgeBaseMixed = [
 async function main() {
   const scrapedData = [];
 
-  // Simula a lista unificada de URLs
+  // Lista unificada de URLs a serem processadas
   const URLS = conhecimentoCompleto;
 
   for (const item of URLS) {
@@ -3229,7 +3229,7 @@ async function main() {
       const html = resp.data;
       const $ = cheerio.load(html);
 
-      // Remove elementos que não fazem parte do conteúdo principal
+      // Remove elementos desnecessários
       $('script, style, nav, footer, header').remove();
 
       // Seleciona o conteúdo principal (ajuste se necessário)
@@ -3246,7 +3246,7 @@ async function main() {
       console.log(`[OK] Sucesso ao carregar: ${item.title}`);
     } catch (err) {
       console.error(`[ERRO] Falha ao carregar: ${item.url}`, err);
-      // Em caso de erro, adiciona o item com content vazio
+      // Se ocorrer erro, adiciona o item com content vazio
       scrapedData.push({
         id: item.id,
         title: item.title,
@@ -3256,8 +3256,8 @@ async function main() {
     }
   }
 
-  // Define o caminho de saída de forma robusta usando path.join
-  const outputPath = path.join(__dirname, 'src', 'knowledgeBase.json');
+  // Usamos process.cwd() para garantir que o arquivo seja criado na raiz do projeto
+  const outputPath = path.join(process.cwd(), 'src', 'knowledgeBase.json');
   fs.writeFileSync(outputPath, JSON.stringify(scrapedData, null, 2), 'utf8');
   console.log("Arquivo knowledgeBase.json gerado com sucesso!");
 }
