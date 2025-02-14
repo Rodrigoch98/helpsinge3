@@ -1,7 +1,7 @@
 /**
  * api/scraping.js
  * ---------------
- * Exemplo de código para realizar scraping via HTTP GET em um endpoint local.
+ * Código para realizar scraping via HTTP GET em um endpoint local.
  * 
  * COMPORTAMENTO:
  *  - Recebe um parâmetro ?url=... na query string.
@@ -9,7 +9,7 @@
  *  - Usa cheerio para extrair e "limpar" o conteúdo principal (remove <script>, <style>, etc.).
  *  - Retorna JSON com a 'url' e o 'content' extraído.
  * 
- * OBS: Usamos o padrão Express Router. Adapte conforme necessário.
+ * OBS: Usamos o padrão Express Router. Adapte para o seu app principal conforme necessário.
  */
 
 const express = require('express');
@@ -33,14 +33,14 @@ router.get('/', async (req, res) => {
     // 3) Carrega o HTML no cheerio
     const $ = cheerio.load(html);
 
-    // 4) Remove elementos que não fazem parte do conteúdo principal
+    // 4) Remove elementos desnecessários
     $('script, style, nav, footer, header').remove();
 
-    // 5) Tenta selecionar o conteúdo principal
+    // 5) Seleciona o conteúdo principal
     const mainContent = $('main, article, .content').first();
     const text = mainContent.length ? mainContent.text() : $.text();
 
-    // 6) Retorna o JSON com o texto "limpo"
+    // 6) Retorna o JSON com o conteúdo "limpo"
     res.status(200).json({
       url,
       content: text.trim()
