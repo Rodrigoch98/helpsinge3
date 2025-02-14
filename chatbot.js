@@ -3283,7 +3283,10 @@ const knowledgeBaseMixed = [
       }
     }, []);
   }
-  const flattenedKnowledgeBase = flattenKnowledgeBase(knowledgeBase);
+  // ********************************************************************
+  // Alteração realizada: usar "knowledgeBaseMixed" em vez de "knowledgeBase"
+  // ********************************************************************
+  const flattenedKnowledgeBase = flattenKnowledgeBase(knowledgeBaseMixed);
 
   // Pré-processa cada item e cria o campo 'sentences'
   flattenedKnowledgeBase.forEach(item => {
@@ -3296,9 +3299,9 @@ const knowledgeBaseMixed = [
     item.sentences = sentences;
   });
 
-  // ==========================================================================
+  // ======================================================================
   // FUNÇÕES DE SCRAPING / FETCH DINÂMICO (OPCIONAL) - PODEM SER REMOVIDAS
-  // ==========================================================================
+  // ======================================================================
   async function fetchPageText(url) {
     try {
       const response = await fetch(url);
@@ -3338,9 +3341,9 @@ const knowledgeBaseMixed = [
   // Exemplificação: se quiser rodar
   // updateKnowledgeBaseWithLiveContent(flattenedKnowledgeBase);
 
-  // ==========================================================================
+  // ======================================================================
   // FUNÇÃO DE SIMILARIDADE (EXEMPLO)
-  // ==========================================================================
+  // ======================================================================
   function calculateSimilarity(text, query) {
     const textWords = new Set(text.split(/\s+/));
     const queryWords = new Set(query.split(/\s+/));
@@ -3358,9 +3361,9 @@ const knowledgeBaseMixed = [
     return similarity * lengthPenalty;
   }
 
-  // ==========================================================================
+  // ======================================================================
   // FUNÇÃO PRINCIPAL DE BUSCA DE RESPOSTA
-  // ==========================================================================
+  // ======================================================================
   async function findBestAnswer(query) {
     const cleanedQuery = preprocessText(query);
     let bestMatch = null;
@@ -3388,9 +3391,9 @@ const knowledgeBaseMixed = [
     return bestMatch;
   }
 
-  // ==========================================================================
+  // ======================================================================
   // FUNÇÃO handleUserMessage() - CHAMADA QUANDO O USUÁRIO ENVIA MSG
-  // ==========================================================================
+  // ======================================================================
   async function handleUserMessage(message) {
     try {
       const bestMatch = await findBestAnswer(message);
@@ -3416,9 +3419,9 @@ const knowledgeBaseMixed = [
     }
   }
 
-  // ==========================================================================
+  // ======================================================================
   // ELEMENTOS DO CHATBOT
-  // ==========================================================================
+  // ======================================================================
   const chatToggle   = document.getElementById("chat-toggle");
   const chatWidget   = document.getElementById("chat-widget");
   const messageInput = document.getElementById("message-input");
@@ -3434,9 +3437,9 @@ const knowledgeBaseMixed = [
     console.log("Todos os elementos do chatbot foram encontrados.");
   }
 
-  // ==========================================================================
+  // ======================================================================
   // FUNÇÕES DE ABRIR/FECHAR/MINIMIZAR O CHAT
-  // ==========================================================================
+  // ======================================================================
   function openChat() {
     console.log("Abrindo o chat...");
     chatWidget.classList.remove("chat-hidden");
@@ -3465,9 +3468,9 @@ const knowledgeBaseMixed = [
     }
   }
 
-  // ==========================================================================
+  // ======================================================================
   // EVENTOS DE CLIQUE
-  // ==========================================================================
+  // ======================================================================
   chatToggle.addEventListener("click", function(e) {
     console.log("Clique no chat-toggle detectado.");
     openChat();
@@ -3481,9 +3484,9 @@ const knowledgeBaseMixed = [
     toggleMinimizeChat();
   });
 
-  // ==========================================================================
+  // ======================================================================
   // ENVIO DE MENSAGENS
-  // ==========================================================================
+  // ======================================================================
   sendButton.addEventListener("click", function () {
     const text = messageInput.value.trim();
     if (text !== "") {
@@ -3501,9 +3504,9 @@ const knowledgeBaseMixed = [
     }
   });
 
-  // ==========================================================================
+  // ======================================================================
   // FUNÇÃO PARA ADICIONAR MENSAGENS NO CHAT
-  // ==========================================================================
+  // ======================================================================
   function addMessage(message, sender) {
     const messageDiv = document.createElement("div");
     messageDiv.className = "chat-message " + sender;
@@ -3512,16 +3515,16 @@ const knowledgeBaseMixed = [
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 
-  // ==========================================================================
+  // ======================================================================
   // FUNÇÃO PARA PRÉ-PROCESSAR O TEXTO (MINÚSCULAS, REMOÇÃO CARACT. ESPECIAIS)
-  // ==========================================================================
+  // ======================================================================
   function preprocessText(text) {
     return text.toLowerCase().replace(/[^a-z0-9\sáéíóúãõâêîôûç]/gi, "").trim();
   }
 
-  // ==========================================================================
+  // ======================================================================
   // EVENTO PARA AJUSTAR POSIÇÃO DO BOTÃO “chat-toggle” EM RELAÇÃO AO RODAPÉ
-  // ==========================================================================
+  // ======================================================================
   const defaultChatToggleBottom = 20; // em px
   window.addEventListener("scroll", function () {
     const footer = document.querySelector("footer.custom-footer");
