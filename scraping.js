@@ -9,8 +9,7 @@
  *  - Usa cheerio para extrair e "limpar" o conteúdo principal (remove <script>, <style>, etc.).
  *  - Retorna JSON com a 'url' e o 'content' extraído.
  * 
- * OBS: Abaixo, usamos o padrão Express Router. Você pode ajustar para 
- *      o seu app principal, importando e montando a rota /api/scraping, por exemplo.
+ * OBS: Usamos o padrão Express Router. Adapte conforme necessário.
  */
 
 const express = require('express');
@@ -38,7 +37,6 @@ router.get('/', async (req, res) => {
     $('script, style, nav, footer, header').remove();
 
     // 5) Tenta selecionar o conteúdo principal
-    //    Ajuste se precisar de outro seletor específico de cada site
     const mainContent = $('main, article, .content').first();
     const text = mainContent.length ? mainContent.text() : $.text();
 
