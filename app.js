@@ -1,19 +1,19 @@
-// app.js
 const express = require('express');
 const app = express();
+const port = process.env.PORT || 3000;
 
-// Se necessário, configure middlewares (ex: express.json())
+// Middlewares para lidar com JSON e URL-encoded
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Importa o router de scraping
+// Importa os routers
 const scrapingRouter = require('./api/scraping');
+const chatbotRouter = require('./api/chatbot');
 
-// Monta o router na rota '/api/scraping'
-// Assim, requisições para, por exemplo, http://localhost:3000/api/scraping?url=... serão tratadas pelo router.
+// Define as rotas
 app.use('/api/scraping', scrapingRouter);
+app.use('/api/chatbot', chatbotRouter);
 
-// Configuração da porta (pode ser definida via variável de ambiente ou padrão 3000)
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+app.listen(port, () => {
+  console.log(`Servidor rodando em http://localhost:${port}`);
 });
