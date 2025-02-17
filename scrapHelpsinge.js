@@ -9,6 +9,9 @@ const path = require('path');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+// Suponha que você tenha um array de objetos com os links a serem processados:
+const knowledgeEntries = [
+    
 [    
     const Help Singe =   {
         "id": "apresentacao",
@@ -3138,54 +3141,45 @@ const cheerio = require('cheerio');
       }
 ];
 
-/**
- * Função principal para processar e gerar knowledgeBase.json
- */
-async function main() {
-  const scrapedData = [];
-
-  for (const page of pages) {
-    try {
-      console.log(`Processando: ${page.title} (${page.url})`);
-      const response = await axios.get(page.url);
-      const html = response.data;
-      const $ = cheerio.load(html);
-
-      // Remove elementos que não fazem parte do conteúdo principal
-      $('script, style, nav, footer, header').remove();
-
-      // Tenta selecionar o conteúdo principal; se não encontrar, usa todo o texto
-      const mainContent = $('main, article, .content').first();
-      const text = mainContent.length ? mainContent.text() : $.text();
-
-      scrapedData.push({
-        id: page.id,
-        title: page.title,
-        url: page.url,
-        content: text.trim()
-      });
-
-      console.log(`[OK] Conteúdo extraído para: ${page.title}`);
-    } catch (error) {
-      console.error(`[ERRO] Não foi possível acessar: ${page.url}`);
-      console.error(error.toString());
-      // Mesmo em caso de erro, registra o item com conteúdo vazio
-      scrapedData.push({
-        id: page.id,
-        title: page.title,
-        url: page.url,
-        content: ""
-      });
-    }
+async function scrapeLink(entry) {
+  try {
+    const response = await axios.get(entry.url);
+    const html = response.data;
+    const $ = cheerio.load(html);
+    // Remove elementos que não queremos
+    $('script, style, nav, footer, header').remove();
+    // Seleciona o conteúdo principal (ajuste os seletores conforme necessário)
+    const mainContent = $('main, article, .content').first();
+    const text = mainContent.length ? mainContent.text() : $.text();
+    return {
+      id: entry.id,
+      title: entry.title,
+      url: entry.url,
+      content: text.trim()
+    };
+  } catch (error) {
+    console.error(`Erro ao processar ${entry.url}:`, error);
+    return {
+      id: entry.id,
+      title: entry.title,
+      url: entry.url,
+      content: ""
+    };
   }
-
-  // Define o caminho para salvar o arquivo localmente (na pasta src)
-  const outputPath = path.join(process.cwd(), 'src', 'knowledgeBase.json');
-  fs.writeFileSync(outputPath, JSON.stringify(scrapedData, null, 2), 'utf8');
-  console.log(`Arquivo ${outputPath} gerado com sucesso!`);
 }
 
-main().catch(error => {
-  console.error('Erro geral:', error);
-  process.exit(1);
-});
+async function updateKnowledgeBase() {
+  console.log("Iniciando atualização da base de conhecimento...");
+  const scrapedData = [];
+  for (const entry of knowledgeEntries) {
+    const data = await scrapeLink(entry);
+    scrapedData.push(data);
+  }
+  // Salva o arquivo em src/knowledgeBase.json
+  const outputPath = path.join(process.cwd(), 'src', 'knowledgeBase.json');
+  fs.writeFileSync(outputPath, JSON.stringify(scrapedData, null, 2), 'utf8');
+  console.log("Base de conhecimento atualizada com sucesso!");
+}
+
+// Exporta a função para ser chamada externamente
+module.exports = { updateKnowledgeBase };
