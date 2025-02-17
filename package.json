@@ -1,6 +1,7 @@
 {
-  "name": "meu-projeto",
+  "name": "atualizar-helpsinge",
   "version": "1.0.0",
+  "description": "Scraper para atualizar a knowledgeBase a partir de links do helpsinge.lince.com.br",
   "main": "api/scraping.js",
   "scripts": {
     "start": "node api/scraping.js",
