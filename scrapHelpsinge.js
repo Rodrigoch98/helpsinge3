@@ -3192,77 +3192,54 @@ const suporte = [
   }
 ];
 
-const knowledgeBaseMixed = [  
-  apresentacao,
-  arquiteturaDoSinge,
-  lgpd,
-  modulos,
-  producao,
-  qualidade,
-  logistica,
-  financeiro,
-  contabilidade,
-  custos,
-  suprimentos,
-  recursosHumanos,
-  internacionalizacao,
-  comercial,
-  marketing,
-  planoOperacional,
-  linceShop,
-  manutencao,
-  suporte
-];
-
 /**
  * Função principal para processar e gerar knowledgeBase.json
  */
 async function main() {
   const scrapedData = [];
 
-  // Lista unificada de URLs a serem processadas
-  const URLS = knowledgeBaseMixed;
-
-  for (const item of URLS) {
+  for (const page of pages) {
     try {
-      const resp = await axios.get(item.url);
-      const html = resp.data;
+      console.log(`Processando: ${page.title} (${page.url})`);
+      const response = await axios.get(page.url);
+      const html = response.data;
       const $ = cheerio.load(html);
 
-      // Remove elementos desnecessários
+      // Remove elementos que não fazem parte do conteúdo principal
       $('script, style, nav, footer, header').remove();
 
-      // Seleciona o conteúdo principal (ajuste se necessário)
+      // Tenta selecionar o conteúdo principal; se não encontrar, usa todo o texto
       const mainContent = $('main, article, .content').first();
       const text = mainContent.length ? mainContent.text() : $.text();
 
       scrapedData.push({
-        id: item.id,
-        title: item.title,
-        url: item.url,
+        id: page.id,
+        title: page.title,
+        url: page.url,
         content: text.trim()
       });
 
-      console.log(`[OK] Sucesso ao carregar: ${item.title}`);
-    } catch (err) {
-      console.error(`[ERRO] Falha ao carregar: ${item.url}`, err);
-      // Se ocorrer erro, adiciona o item com content vazio
+      console.log(`[OK] Conteúdo extraído para: ${page.title}`);
+    } catch (error) {
+      console.error(`[ERRO] Não foi possível acessar: ${page.url}`);
+      console.error(error.toString());
+      // Mesmo em caso de erro, registra o item com conteúdo vazio
       scrapedData.push({
-        id: item.id,
-        title: item.title,
-        url: item.url,
+        id: page.id,
+        title: page.title,
+        url: page.url,
         content: ""
       });
     }
   }
 
-  // Usamos process.cwd() para garantir que o arquivo seja criado na raiz do projeto
+  // Define o caminho para salvar o arquivo localmente (na pasta src)
   const outputPath = path.join(process.cwd(), 'src', 'knowledgeBase.json');
   fs.writeFileSync(outputPath, JSON.stringify(scrapedData, null, 2), 'utf8');
-  console.log("Arquivo knowledgeBase.json gerado com sucesso!");
+  console.log(`Arquivo ${outputPath} gerado com sucesso!`);
 }
 
-main().catch(err => {
-  console.error(err);
+main().catch(error => {
+  console.error('Erro geral:', error);
   process.exit(1);
 });
