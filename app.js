@@ -31,6 +31,6 @@ cron.schedule('0 3 * * *', () => {
 // Também, se desejar, você pode chamar a atualização logo na inicialização:
 updateKnowledgeBase();
 
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
+app.listen(3000, () => {
+  console.log('Servidor rodando na porta 3000');
 });
