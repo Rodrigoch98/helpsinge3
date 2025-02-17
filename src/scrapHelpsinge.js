@@ -11,9 +11,7 @@ const cheerio = require('cheerio');
 
 // Suponha que você tenha um array de objetos com os links a serem processados:
 const knowledgeEntries = [
-    
-[    
-    const HelpSinge =   {
+      {
         "id": "apresentacao",
         "title": "Apresentação",
         "url": "https://helpsinge.lince.com.br/apresentacao.html?ms=AAAAAAAAAAAAAAA%3D&st=MA%3D%3D&sct=MA%3D%3D&mw=MzAw",
