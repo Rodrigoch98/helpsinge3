@@ -3221,7 +3221,7 @@ async function main() {
   const scrapedData = [];
 
   // Lista unificada de URLs a serem processadas
-  const URLS = conhecimentoCompleto;
+  const URLS = knowledgeBaseMixed;
 
   for (const item of URLS) {
     try {
