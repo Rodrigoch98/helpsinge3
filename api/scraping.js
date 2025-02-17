@@ -1,52 +1,38 @@
-/**
- * api/scraping.js
- * ---------------
- * Código para realizar scraping via HTTP GET em um endpoint local.
- * 
- * COMPORTAMENTO:
- *  - Recebe um parâmetro ?url=... na query string.
- *  - Faz a requisição (axios) para a URL informada.
- *  - Usa cheerio para extrair e "limpar" o conteúdo principal (remove <script>, <style>, etc.).
- *  - Retorna JSON com a 'url' e o 'content' extraído.
- * 
- * OBS: Usamos o padrão Express Router. Adapte para o seu app principal conforme necessário.
- */
-
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-// GET /api/scraping?url=https://exemplo.com
+// GET /api/scraping?url=...
 router.get('/', async (req, res) => {
-  // 1) Lê a URL passada via query string
   const { url } = req.query;
   if (!url) {
     return res.status(400).json({ error: 'A URL é obrigatória.' });
   }
-
+  
   try {
-    // 2) Faz a requisição HTTP (axios) para obter o HTML da página
+    // Faz a requisição HTTP para obter o HTML da página
     const response = await axios.get(url);
     const html = response.data;
-
-    // 3) Carrega o HTML no cheerio
     const $ = cheerio.load(html);
 
-    // 4) Remove elementos desnecessários
+    // Remove elementos desnecessários
     $('script, style, nav, footer, header').remove();
 
-    // 5) Seleciona o conteúdo principal
+    // Seleciona o conteúdo principal (ajuste os seletores conforme a estrutura do site)
     const mainContent = $('main, article, .content').first();
     const text = mainContent.length ? mainContent.text() : $.text();
 
-    // 6) Retorna o JSON com o conteúdo "limpo"
+    // Extrai o título da página
+    const pageTitle = $('title').text();
+
+    // Retorna o JSON com os dados extraídos
     res.status(200).json({
       url,
+      title: pageTitle.trim(),
       content: text.trim()
     });
   } catch (error) {
-    // 7) Em caso de erro, retorna mensagem e detalhes
     res.status(500).json({
       error: 'Falha ao acessar a URL',
       details: error.toString()
