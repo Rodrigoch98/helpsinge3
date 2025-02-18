@@ -7,7 +7,8 @@ const cron = require('node-cron');
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'src')));
+// Sirva os arquivos estáticos da pasta "public"
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Routers
 const scrapingRouter = require('./api/scraping');
@@ -30,9 +31,9 @@ cron.schedule('0 3 * * *', () => {
 
 // Se o arquivo knowledgeBase.json não existir, gera-o
 const fs = require('fs');
-const kbPath = path.join(__dirname, 'src', 'knowledgeBase.json');
+const kbPath = path.join(__dirname, 'public', 'knowledgeBase.json');
 if (!fs.existsSync(kbPath)) {
-  console.log("Arquivo knowledgeBase.json não encontrado. Gerando-o agora...");
+  console.log("Arquivo knowledgeBase.json não encontrado em public. Gerando-o agora...");
   updateKnowledgeBase();
 }
 
