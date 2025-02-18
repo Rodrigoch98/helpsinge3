@@ -7,17 +7,17 @@ const cron = require('node-cron');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middlewares
+// Middlewares para receber JSON e dados de formulário
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Garante que a pasta "public" exista
+// Define a pasta "public" (garante que está no local certo)
 const publicDir = path.join(__dirname, 'public');
 if (!fs.existsSync(publicDir)) {
   fs.mkdirSync(publicDir, { recursive: true });
 }
 
-// Função para verificar se uma string é JSON válido
+// Função para validar se uma string é JSON
 function isValidJson(str) {
   try {
     JSON.parse(str);
@@ -32,38 +32,39 @@ const scrapingRouter = require('./api/scraping');
 const chatbotRouter = require('./api/chatbot');
 const { updateKnowledgeBase } = require('./src/scrapHelpsinge');
 
-// Rota para servir o arquivo knowledgeBase.json
+// Rota personalizada para o arquivo knowledgeBase.json
 app.get('/knowledgeBase.json', async (req, res) => {
   const kbPath = path.join(publicDir, 'knowledgeBase.json');
   try {
-    // Se o arquivo não existir, gera-o
+    // Se o arquivo não existir, tenta gerá-lo
     if (!fs.existsSync(kbPath)) {
-      console.log("Arquivo knowledgeBase.json não encontrado. Gerando um novo...");
+      console.log("knowledgeBase.json não encontrado. Gerando...");
       await updateKnowledgeBase();
     } else {
-      // Lê o arquivo e verifica se o conteúdo é JSON válido
+      // Se existir, verifica se o conteúdo é um JSON válido
       const data = fs.readFileSync(kbPath, 'utf8');
       if (!isValidJson(data)) {
-        console.warn("Conteúdo inválido detectado em knowledgeBase.json. Regenerando...");
+        console.warn("Conteúdo inválido em knowledgeBase.json. Regenerando...");
+        fs.unlinkSync(kbPath);
         await updateKnowledgeBase();
       }
     }
     // Envia o arquivo JSON
     res.sendFile(kbPath);
   } catch (error) {
-    console.error("Erro ao servir o arquivo knowledgeBase.json:", error.message);
-    res.status(500).json({ error: "Erro Interno do Servidor" });
+    console.error("Erro ao servir knowledgeBase.json:", error.message);
+    res.status(500).json({ error: "Erro interno do servidor" });
   }
 });
 
 // Serve os arquivos estáticos da pasta "public"
 app.use(express.static(publicDir));
 
-// Define os routers para os endpoints adicionais
+// Configura os routers para endpoints adicionais
 app.use('/api/scraping', scrapingRouter);
 app.use('/api/chatbot', chatbotRouter);
 
-// No startup, se o arquivo existir mas o conteúdo não for um JSON válido, remove-o para forçar a regeneração
+// No startup, se o arquivo existir mas não for um JSON válido, remove-o
 const kbPathStartup = path.join(publicDir, 'knowledgeBase.json');
 try {
   if (fs.existsSync(kbPathStartup)) {
@@ -88,10 +89,16 @@ cron.schedule(
   }
 );
 
-// Atualiza a base de conhecimento no startup
-console.log("Atualizando a base de conhecimento no startup...");
-updateKnowledgeBase();
-
-app.listen(port, () => {
-  console.log(`Servidor rodando na porta ${port}`);
-});
+// Inicia o servidor somente após atualizar a base de conhecimento
+(async () => {
+  console.log("Atualizando a base de conhecimento no startup...");
+  try {
+    await updateKnowledgeBase();
+    app.listen(port, () => {
+      console.log(`Servidor rodando na porta ${port}`);
+    });
+  } catch (err) {
+    console.error("Erro ao atualizar a base de conhecimento no startup:", err.message);
+    process.exit(1);
+  }
+})();
