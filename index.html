@@ -12,9 +12,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
   <!-- Custom Styles -->
   <link rel="stylesheet" href="styles.css">
-  <!-- Lunr.js (opcional para busca dinâmica) -->
+  <!-- Lunr.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js"></script>
-  <!-- Font Awesome para os ícones das redes sociais -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
@@ -601,7 +601,7 @@
     </div>
   </footer>
   
-  <!-- Botão de toggle do Chat (ícone animado) -->
+  <!-- Botão de toggle do Chat -->
   <button id="chat-toggle">
     <lord-icon
       src="https://cdn.lordicon.com/ecngpoqo.json"
@@ -630,7 +630,7 @@
   <!-- Scripts do Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   
-  <!-- Script do Chatbot e Lógica de Busca -->
+  <!-- Script do Chatbot e ajustes dinâmicos -->
   <script>
     // Base de conhecimento embutida (você pode atualizar os registros conforme necessário)
     const knowledgeBase = [
@@ -3762,7 +3762,18 @@
   }
 ]
 
-    // Função para adicionar mensagens no chat
+  // Inicializa a base de conhecimento e o índice Lunr.js
+    window.knowledgeBase = knowledgeBase;
+    window.lunrIndex = lunr(function() {
+      this.ref('id');
+      this.field('title');
+      this.field('content');
+      window.knowledgeBase.forEach(function(doc) {
+        this.add(doc);
+      }, this);
+    });
+
+    // Função para adicionar mensagens ao chat
     function addMessage(content, sender = 'bot') {
       const chatBody = document.getElementById('chat-messages');
       const message = document.createElement('div');
@@ -3772,12 +3783,12 @@
       chatBody.scrollTop = chatBody.scrollHeight;
     }
 
-    // Remove espaços extras
+    // Função para processar o texto (remove espaços laterais)
     function preprocessText(text) {
       return text.trim();
     }
 
-    // Saudação baseada no horário e idioma
+    // Função que define a saudação
     function getGreeting() {
       const now = new Date();
       const hour = now.getHours();
@@ -3793,63 +3804,53 @@
       return greeting;
     }
 
-    // Exibe a saudação ao carregar o DOM
+    // Exibe a mensagem de saudação ao carregar o DOM
     document.addEventListener("DOMContentLoaded", function() {
       addMessage(getGreeting(), "bot");
     });
 
-    // Função para enviar mensagem e buscar resposta
+    // Função para enviar a mensagem do usuário e buscar resposta dinâmica
     async function sendMessage() {
       const input = document.getElementById('message-input');
       const userMessage = preprocessText(input.value);
       if (userMessage) {
-        addMessage("<strong>Você:</strong> " + userMessage, 'user');
+        addMessage(userMessage, 'user');
         input.value = '';
         handleUserMessage(userMessage);
       }
     }
 
-    // Processa a mensagem do usuário e exibe a resposta
+    // Função que processa a mensagem do usuário e busca uma resposta dinâmica
     async function handleUserMessage(message) {
       try {
         const response = await getDynamicResponse(message);
-        addMessage("<strong>Bot:</strong> " + response, "bot");
+        addMessage(response, "bot");
       } catch (error) {
         console.error("Erro no processamento:", error);
         addMessage("Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente.", "bot");
       }
     }
 
-    // Função de busca utilizando Lunr.js com a base embutida
+    // Função para gerar resposta dinâmica de forma resumida e embasada
     async function getDynamicResponse(query) {
-      // Cria o índice Lunr se ainda não estiver criado
-      if (!window.lunrIndex) {
-        window.lunrIndex = lunr(function() {
-          this.ref('id');
-          this.field('title');
-          this.field('content');
-          knowledgeBase.forEach(function(doc) {
-            this.add(doc);
-          }, this);
-        });
-      }
-      
-      // Realiza a busca com Lunr
+      // Realiza a busca usando Lunr.js
       const results = window.lunrIndex.search(query);
       if (results.length > 0) {
-        const firstResultRef = results[0].ref;
-        const doc = knowledgeBase.find(item => item.id === firstResultRef);
+        // Seleciona o melhor resultado
+        const bestResultRef = results[0].ref;
+        const doc = window.knowledgeBase.find(item => item.id === bestResultRef);
         if (doc) {
-          return doc.content + "<br><br><a href=\"" + doc.url + "\" target=\"_blank\">" + doc.title + "</a>";
-        } else {
-          return "Desculpe, não encontrei uma resposta para sua dúvida.";
+          // Extrai os dois primeiros períodos para criar um resumo breve
+          const sentences = doc.content.split(/[.!?]\s+/);
+          let summary = sentences.slice(0, 2).join('. ') + '.';
+          // Monta a resposta com o resumo e o hyperlink para o conteúdo completo
+          return summary + ' <br><a href="' + doc.url + '" target="_blank"><strong>' + doc.title + '</strong></a>';
         }
-      } else {
-        return "Desculpe, não encontrei uma resposta para sua dúvida.";
       }
+      return "Desculpe, ocorreu um erro ao carregar a base de conhecimento.";
     }
 
-    // Eventos de envio de mensagem
+    // Eventos para envio de mensagem
     document.getElementById('message-input').addEventListener('keydown', function(event) {
       if (event.key === 'Enter') {
         event.preventDefault();
@@ -3881,12 +3882,12 @@
       chatToggle.style.display = 'block';
     });
 
-    // Ajuste dinâmico para o ícone do chatbot não ultrapassar o rodapé
+    // Ajuste dinâmico para que o ícone do chatbot não ultrapasse o rodapé
     window.addEventListener('scroll', function() {
       const chatToggle = document.getElementById('chat-toggle');
       const footer = document.querySelector('.custom-footer');
       const footerRect = footer.getBoundingClientRect();
-      const defaultBottom = 20; 
+      const defaultBottom = 20;
       if (footerRect.top < window.innerHeight) {
         const overlap = window.innerHeight - footerRect.top;
         chatToggle.style.bottom = (defaultBottom + overlap) + 'px';
@@ -3897,7 +3898,7 @@
   </script>
 
   <style>
-    /* Estado minimizado: oculta mensagens e entrada do chat */
+    /* Estado minimizado: oculta mensagens e área de entrada */
     #chat-widget.minimized #chat-messages,
     #chat-widget.minimized #chat-input {
       display: none;
