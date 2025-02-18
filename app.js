@@ -37,12 +37,9 @@ cron.schedule('0 3 * * *', () => {
   timezone: "UTC"
 });
 
-// Se o arquivo knowledgeBase.json não existir, gera-o
-const kbPath = path.join(publicDir, 'knowledgeBase.json');
-if (!fs.existsSync(kbPath)) {
-  console.log("Arquivo knowledgeBase.json não encontrado em public. Gerando-o agora...");
-  updateKnowledgeBase();
-}
+// Atualiza o arquivo knowledgeBase.json sempre que o servidor iniciar
+console.log("Atualizando a base de conhecimento no startup...");
+updateKnowledgeBase();
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
