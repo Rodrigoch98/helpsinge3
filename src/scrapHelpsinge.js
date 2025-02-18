@@ -3173,11 +3173,10 @@ async function updateKnowledgeBase() {
     const data = await scrapeLink(entry);
     scrapedData.push(data);
   }
-  // Salva o arquivo em src/knowledgeBase.json
-  const outputPath = path.join(__dirname, 'knowledgeBase.json');
+  // Salva o arquivo na pasta "src" para que seja servido corretamente
+  const outputPath = path.join(__dirname, 'src', 'knowledgeBase.json');
   fs.writeFileSync(outputPath, JSON.stringify(scrapedData, null, 2), 'utf8');
   console.log("Base de conhecimento atualizada com sucesso!");
 }
 
-// Exporta a função para ser utilizada externamente
 module.exports = { updateKnowledgeBase };
