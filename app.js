@@ -1,9 +1,10 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const cron = require('node-cron');
+
 const app = express();
 const port = process.env.PORT || 3000;
-const cron = require('node-cron');
 
 // Middlewares
 app.use(express.json());
@@ -21,26 +22,27 @@ app.use(express.static(publicDir));
 // Routers
 const scrapingRouter = require('./api/scraping');
 const chatbotRouter = require('./api/chatbot');
-
 app.use('/api/scraping', scrapingRouter);
 app.use('/api/chatbot', chatbotRouter);
 
-// Se o arquivo existir mas não for um JSON válido, apaga-o e força a atualização
+// Importa a função de atualização do scraper
+const { updateKnowledgeBase } = require('./src/scrapHelpsinge');
+
+// Caminho absoluto para o arquivo knowledgeBase.json
 const kbPath = path.join(publicDir, 'knowledgeBase.json');
+
+// Se o arquivo existir mas não for JSON válido, apaga-o
 try {
   const data = fs.readFileSync(kbPath, 'utf8');
-  JSON.parse(data); // Tenta fazer parse para confirmar que é JSON
+  JSON.parse(data);
 } catch (error) {
-  console.warn("Arquivo knowledgeBase.json inválido. Apagando e regenerando...");
+  console.warn("Arquivo knowledgeBase.json inválido ou inexistente. Removendo e regenerando...");
   if (fs.existsSync(kbPath)) {
     fs.unlinkSync(kbPath);
   }
 }
 
-// Importa a função de atualização do scraper
-const { updateKnowledgeBase } = require('./src/scrapHelpsinge');
-
-// Agende a tarefa para atualizar a base de conhecimento diariamente às 03:00 UTC
+// Agenda a tarefa para atualizar a base de conhecimento diariamente às 03:00 UTC
 cron.schedule('0 3 * * *', () => {
   console.log("Executando tarefa agendada: Atualizando base de conhecimento.");
   updateKnowledgeBase();
@@ -49,7 +51,7 @@ cron.schedule('0 3 * * *', () => {
   timezone: "UTC"
 });
 
-// Atualiza o arquivo knowledgeBase.json sempre que o servidor iniciar
+// Atualiza a base de conhecimento no startup (sempre forçando a atualização)
 console.log("Atualizando a base de conhecimento no startup...");
 updateKnowledgeBase();
 
