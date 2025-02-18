@@ -19,12 +19,12 @@ app.use('/api/chatbot', chatbotRouter);
 // Importa a função de atualização do scraper
 const { updateKnowledgeBase } = require('./src/scrapHelpsinge');
 
-// Caminho completo para o arquivo knowledgeBase.json
+// Caminho para o arquivo knowledgeBase.json (na pasta src)
 const kbPath = path.join(__dirname, 'src', 'knowledgeBase.json');
 
-// Função para inicializar o servidor somente após garantir que o arquivo knowledgeBase.json exista
+// Função para iniciar o servidor somente após garantir que o arquivo knowledgeBase.json existe
 async function initServer() {
-  // Se o arquivo não existir, gere-o e aguarde sua criação
+  // Se o arquivo não existir, gera-o automaticamente
   if (!fs.existsSync(kbPath)) {
     console.log("Arquivo knowledgeBase.json não encontrado. Gerando-o agora...");
     await updateKnowledgeBase();
@@ -43,7 +43,7 @@ async function initServer() {
     }
   );
 
-  // Inicia o servidor somente após garantir que o arquivo está presente
+  // Inicia o servidor
   app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
   });
