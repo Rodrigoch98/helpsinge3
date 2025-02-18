@@ -3762,27 +3762,6 @@
   }
 ]
 
-  // Inicializa a base de conhecimento e o índice Lunr.js
-    window.knowledgeBase = knowledgeBase;
-    window.lunrIndex = lunr(function() {
-      this.ref('id');
-      this.field('title');
-      this.field('content');
-      window.knowledgeBase.forEach(function(doc) {
-        this.add(doc);
-      }, this);
-    });
-
-    // Função para adicionar mensagens ao chat
-    function addMessage(content, sender = 'bot') {
-      const chatBody = document.getElementById('chat-messages');
-      const message = document.createElement('div');
-      message.classList.add('chat-message', sender);
-      message.innerHTML = content;
-      chatBody.appendChild(message);
-      chatBody.scrollTop = chatBody.scrollHeight;
-    }
-
 
     /**********************
      * Inicialização do Lunr.js com a base local
