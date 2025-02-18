@@ -9,7 +9,7 @@ const path = require('path');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-// Suponha que você tenha um array de objetos com os links a serem processados:
+// Array de objetos com os links a serem processados:
 const knowledgeEntries = [
       {
         "id": "apresentacao",
@@ -3144,9 +3144,9 @@ async function scrapeLink(entry) {
     const response = await axios.get(entry.url);
     const html = response.data;
     const $ = cheerio.load(html);
-    // Remove elementos desnecessários
+    // Remove elementos que não queremos
     $('script, style, nav, footer, header').remove();
-    // Seleciona o conteúdo principal (ajuste os seletores conforme necessário)
+    // Seleciona o conteúdo principal (ajuste conforme necessário)
     const mainContent = $('main, article, .content').first();
     const text = mainContent.length ? mainContent.text() : $.text();
     return {
@@ -3174,7 +3174,7 @@ async function updateKnowledgeBase() {
     scrapedData.push(data);
   }
   // Salva o arquivo na pasta "src" para que seja servido corretamente
-  const outputPath = path.join(__dirname, 'src', 'knowledgeBase.json');
+  const outputPath = path.join(__dirname, 'knowledgeBase.json');
   fs.writeFileSync(outputPath, JSON.stringify(scrapedData, null, 2), 'utf8');
   console.log("Base de conhecimento atualizada com sucesso!");
 }
