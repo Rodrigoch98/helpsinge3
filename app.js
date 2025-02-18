@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -17,20 +16,20 @@ if (!fs.existsSync(publicDir)) {
   fs.mkdirSync(publicDir, { recursive: true });
 }
 
-// Rota para o arquivo knowledgeBase.json
+// Rota para servir o arquivo knowledgeBase.json
 app.get('/knowledgeBase.json', (req, res) => {
   const kbPath = path.join(publicDir, 'knowledgeBase.json');
   if (fs.existsSync(kbPath)) {
     res.sendFile(kbPath);
   } else {
-    res.json([]); // Retorna um array vazio se o arquivo não existir
+    res.json([]);
   }
 });
 
 // Serve os arquivos estáticos da pasta "public"
 app.use(express.static(publicDir));
 
-// Importa as rotas (exemplo)
+// Routers
 const scrapingRouter = require('./api/scraping');
 const chatbotRouter = require('./api/chatbot');
 app.use('/api/scraping', scrapingRouter);
@@ -39,10 +38,8 @@ app.use('/api/chatbot', chatbotRouter);
 // Importa a função de atualização do scraper
 const { updateKnowledgeBase } = require('./src/scrapHelpsinge');
 
-// Caminho para o arquivo knowledgeBase.json
+// Verifica se o arquivo knowledgeBase.json é um JSON válido; se não, remove-o para forçar regeneração
 const kbPath = path.join(publicDir, 'knowledgeBase.json');
-
-// Verifica se o arquivo é um JSON válido; se não, remove-o
 try {
   const data = fs.readFileSync(kbPath, 'utf8');
   JSON.parse(data);
@@ -51,7 +48,7 @@ try {
   if (fs.existsSync(kbPath)) fs.unlinkSync(kbPath);
 }
 
-// Agenda a tarefa para atualizar a base diariamente às 03:00 UTC
+// Agenda a tarefa para atualizar a base de conhecimento diariamente às 03:00 UTC
 cron.schedule('0 3 * * *', () => {
   console.log("Executando tarefa agendada: Atualizando base de conhecimento.");
   updateKnowledgeBase();
@@ -60,7 +57,7 @@ cron.schedule('0 3 * * *', () => {
   timezone: "UTC"
 });
 
-// Atualiza a base no startup
+// Atualiza a base de conhecimento no startup
 console.log("Atualizando a base de conhecimento no startup...");
 updateKnowledgeBase();
 
