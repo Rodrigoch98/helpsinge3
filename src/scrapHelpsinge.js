@@ -3144,7 +3144,7 @@ async function scrapeLink(entry) {
     const response = await axios.get(entry.url);
     const html = response.data;
     const $ = cheerio.load(html);
-    // Remove elementos que não queremos
+    // Remove elementos indesejados
     $('script, style, nav, footer, header').remove();
     // Seleciona o conteúdo principal (ajuste os seletores conforme necessário)
     const mainContent = $('main, article, .content').first();
@@ -3173,11 +3173,11 @@ async function updateKnowledgeBase() {
     const data = await scrapeLink(entry);
     scrapedData.push(data);
   }
-  // Salva o arquivo em src/knowledgeBase.json
-  const outputPath = path.join(process.cwd(), 'src', 'knowledgeBase.json');
+  // Salva o arquivo em src/knowledgeBase.json usando __dirname para garantir o caminho correto
+  const outputPath = path.join(__dirname, 'knowledgeBase.json');
   fs.writeFileSync(outputPath, JSON.stringify(scrapedData, null, 2), 'utf8');
   console.log("Base de conhecimento atualizada com sucesso!");
 }
 
-// Exporta a função para ser chamada externamente
+// Exporta a função para ser utilizada externamente
 module.exports = { updateKnowledgeBase };
