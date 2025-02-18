@@ -9,11 +9,11 @@ const port = process.env.PORT || 3000;
 function startServer() {
   const app = express();
 
-  // Middlewares
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
-  app.use(express.static(path.join(__dirname, 'src')));
-
+ // Middleware para servir arquivos estáticos a partir da pasta "src"
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'src')));
+  
   // Routers
   const scrapingRouter = require('./api/scraping');
   const chatbotRouter = require('./api/chatbot');
@@ -23,6 +23,15 @@ function startServer() {
 
   // Importa a função de atualização do scraper
   const { updateKnowledgeBase } = require('./src/scrapHelpsinge');
+
+  // Caminho completo para o arquivo knowledgeBase.json na pasta "src"
+  const kbPath = path.join(__dirname, 'src', 'knowledgeBase.json');
+
+  // Se o arquivo não existir, gera-o imediatamente
+  if (!fs.existsSync(kbPath)) {
+  console.log("Arquivo knowledgeBase.json não encontrado. Gerando-o agora...");
+  updateKnowledgeBase();
+}
 
   // Agende a tarefa para atualizar a base de conhecimento diariamente às 03:00 UTC
   cron.schedule('0 3 * * *', () => {
