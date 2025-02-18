@@ -11,22 +11,22 @@ router.get('/', async (req, res) => {
   }
   
   try {
-    // Faz a requisição HTTP para obter o HTML da página
+    // Realiza a requisição HTTP para obter o HTML da página
     const response = await axios.get(url);
     const html = response.data;
     const $ = cheerio.load(html);
 
-    // Remove elementos desnecessários
+    // Remove elementos que não fazem parte do conteúdo principal
     $('script, style, nav, footer, header').remove();
 
-    // Seleciona o conteúdo principal (ajuste os seletores conforme a estrutura do site)
+    // Tenta selecionar o conteúdo principal; ajuste os seletores conforme necessário
     const mainContent = $('main, article, .content').first();
     const text = mainContent.length ? mainContent.text() : $.text();
 
     // Extrai o título da página
     const pageTitle = $('title').text();
 
-    // Retorna o JSON com os dados extraídos
+    // Retorna os dados extraídos no formato JSON
     res.status(200).json({
       url,
       title: pageTitle.trim(),
