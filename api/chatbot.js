@@ -14,18 +14,17 @@ function readKnowledgeBase() {
       return null;
     }
     const data = fs.readFileSync(kbPath, 'utf8');
-    // Se o arquivo estiver vazio, retorna null
     if (!data.trim()) {
       return null;
     }
     return JSON.parse(data);
   } catch (error) {
-    console.error("Erro ao ler/parsing knowledgeBase.json:", error.message);
+    console.error("Erro ao ler/parsing do knowledgeBase.json:", error.message);
     return null;
   }
 }
 
-// Função para calcular a relevância de um texto em relação à query (análise de frequência)
+// Função para calcular a relevância da query em relação a um texto
 function calculateRelevance(query, text) {
   const queryWords = query.toLowerCase().split(/\s+/);
   const textLower = text.toLowerCase();
@@ -41,7 +40,7 @@ function calculateRelevance(query, text) {
   return score;
 }
 
-// Função para criar um resumo do conteúdo (snippet)
+// Função para criar um snippet (resumo) do conteúdo
 function createSnippet(content, length = 200) {
   if (content.length <= length) return content;
   return content.substring(0, length).trim() + '...';
@@ -54,7 +53,7 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ error: "Query não fornecida." });
   }
 
-  // Tenta atualizar a base de conhecimento; se falhar, usa os dados já existentes
+  // Tenta atualizar a base de conhecimento antes de realizar a busca
   try {
     await updateKnowledgeBase();
   } catch (error) {
@@ -63,31 +62,27 @@ router.post('/', async (req, res) => {
   }
 
   // Lê a base de conhecimento
-  let kb = readKnowledgeBase();
+  const kb = readKnowledgeBase();
   if (!kb || !Array.isArray(kb) || kb.length === 0) {
     return res.status(500).json({ error: "Desculpe, ocorreu um erro ao carregar a base de conhecimento." });
   }
 
-  // Analisa cada registro considerando todos os campos (não apenas title e content)
+  // Analisa cada registro, considerando uma combinação de todos os campos relevantes
   const results = kb.map(entry => {
-    // Concatena title, content e (se houver) outros campos relevantes
     const combinedText = `${entry.title} ${entry.content}`;
     const score = calculateRelevance(query, combinedText);
     return { ...entry, score };
   }).filter(entry => entry.score > 0);
 
-  // Se nenhum registro tiver relevância, retorna mensagem de erro
   if (results.length === 0) {
     return res.status(404).json({ error: "Desculpe, ocorreu um erro ao carregar a base de conhecimento." });
   }
 
-  // Ordena os resultados por pontuação (score) em ordem decrescente
+  // Ordena os resultados pela pontuação em ordem decrescente e seleciona os melhores
   results.sort((a, b) => b.score - a.score);
-
-  // Seleciona os três registros mais relevantes (ou menos, se não houver três)
   const topResults = results.slice(0, 3);
 
-  // Constrói a resposta de forma orgânica, formatada e com hyperlinks para as fontes
+  // Monta a resposta de forma orgânica e bem formatada
   let responseText = "Olá! Baseado na sua dúvida, identifiquei as seguintes informações que podem ajudar:\n\n";
   topResults.forEach(entry => {
     const snippet = createSnippet(entry.content, 200);
