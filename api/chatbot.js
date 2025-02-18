@@ -1,93 +1,58 @@
 const express = require('express');
 const router = express.Router();
-const fs = require('fs');
 const path = require('path');
-const axios = require('axios');
-const cheerio = require('cheerio');
+const fs = require('fs');
 
-// Carrega a base de conhecimento do arquivo JSON
-// Atenção: verifique que o arquivo knowledgeBase.json está na pasta "public" (raiz do projeto)
-const knowledgeBasePath = path.join(__dirname, '../public', 'knowledgeBase.json');
-let knowledgeBase = [];
-try {
-  if (fs.existsSync(knowledgeBasePath)) {
-    const data = fs.readFileSync(knowledgeBasePath, 'utf8');
-    knowledgeBase = JSON.parse(data);
-    console.log('Base de conhecimento carregada com sucesso.');
-  } else {
-    console.error('Arquivo knowledgeBase.json não encontrado em:', knowledgeBasePath);
-  }
-} catch (err) {
-  console.error('Erro ao carregar a base de conhecimento:', err);
-}
+// Importa a função de atualização da base de conhecimento
+const { updateKnowledgeBase } = require('../src/scrapHelpsinge');
 
-// Função de similaridade usando o índice de Jaccard
-function jaccardSimilarity(text1, text2) {
-  const words1 = new Set(text1.toLowerCase().split(/\W+/));
-  const words2 = new Set(text2.toLowerCase().split(/\W+/));
-  const intersection = new Set([...words1].filter(x => words2.has(x)));
-  const union = new Set([...words1, ...words2]);
-  return union.size === 0 ? 0 : intersection.size / union.size;
-}
-
-// GET /api/chatbot?question=...
-router.get('/', async (req, res) => {
-  const question = req.query.question;
-  if (!question) {
-    return res.status(400).json({ error: 'A pergunta (question) é obrigatória na query string.' });
-  }
-  
-  // Encontra a entrada da base de conhecimento com maior similaridade
-  let bestMatch = null;
-  let bestScore = 0;
-  
-  for (const entry of knowledgeBase) {
-    // Calcula a similaridade com base no título e no conteúdo
-    const titleSim = jaccardSimilarity(question, entry.title || '');
-    const contentSim = jaccardSimilarity(question, entry.content || '');
-    const simScore = Math.max(titleSim, contentSim);
-    if (simScore > bestScore) {
-      bestScore = simScore;
-      bestMatch = entry;
-    }
-  }
-  
-  // Se a similaridade for baixa, retorna mensagem padrão
-  if (!bestMatch || bestScore < 0.1) {
-    return res.json({ answer: "Desculpe, não encontrei uma resposta para a sua pergunta." });
-  }
-  
-  // Tenta obter o conteúdo atualizado diretamente do link associado ao bestMatch
+// Função para ler o arquivo knowledgeBase.json
+function readKnowledgeBase() {
+  const kbPath = path.join(__dirname, '..', 'public', 'knowledgeBase.json');
   try {
-    const response = await axios.get(bestMatch.url);
-    const html = response.data;
-    const $ = cheerio.load(html);
-    
-    // Remove elementos indesejados e extrai o conteúdo principal
-    $('script, style, nav, footer, header').remove();
-    const mainContent = $('main, article, .content').first();
-    const fetchedText = mainContent.length ? mainContent.text().trim() : $.text().trim();
-    
-    // Calcula a similaridade entre a pergunta e o texto obtido do link
-    const fetchedSim = jaccardSimilarity(question, fetchedText);
-    
-    // Define a resposta final: utiliza o texto atualizado se a similaridade for maior
-    const finalAnswer = (fetchedSim > bestScore) ? fetchedText : bestMatch.content;
-    
+    const data = fs.readFileSync(kbPath, 'utf8');
+    const kb = JSON.parse(data);
+    return kb;
+  } catch (error) {
+    console.error("Erro ao ler knowledgeBase.json:", error.message);
+    return null;
+  }
+}
+
+// Endpoint do chatbot – recebe uma query e retorna uma resposta da base de conhecimento
+router.post('/', async (req, res) => {
+  const { query } = req.body;
+  if (!query) {
+    return res.status(400).json({ error: "Query não fornecida." });
+  }
+
+  // Tenta atualizar a base de conhecimento
+  try {
+    await updateKnowledgeBase();
+  } catch (error) {
+    console.error("Erro ao atualizar a base de conhecimento:", error.message);
+    // Se a atualização falhar, continua com os dados já presentes
+  }
+
+  // Lê a base de conhecimento
+  const kb = readKnowledgeBase();
+  if (!kb || !Array.isArray(kb) || kb.length === 0) {
+    return res.status(500).json({ error: "Desculpe, ocorreu um erro ao carregar a base de conhecimento." });
+  }
+
+  // Procura por um registro cujo título ou conteúdo contenha a query (busca simples, sem processamento de NLP)
+  const answerEntry = kb.find(entry =>
+    entry.content.toLowerCase().includes(query.toLowerCase()) ||
+    entry.title.toLowerCase().includes(query.toLowerCase())
+  );
+
+  if (answerEntry) {
     return res.json({
-      answer: finalAnswer,
-      title: bestMatch.title,
-      similarity: Math.max(bestScore, fetchedSim)
+      answer: answerEntry.content,
+      source: answerEntry.url
     });
-    
-  } catch (err) {
-    // Em caso de erro ao acessar o link, retorna o conteúdo pré-scrape com um aviso
-    return res.json({
-      answer: bestMatch.content,
-      title: bestMatch.title,
-      similarity: bestScore,
-      warning: "Erro ao acessar o link, resposta baseada no conteúdo pré-scrape."
-    });
+  } else {
+    return res.status(404).json({ error: "Desculpe, ocorreu um erro ao carregar a base de conhecimento." });
   }
 });
 
