@@ -76,6 +76,15 @@ try {
   if (fs.existsSync(kbPathStartup)) fs.unlinkSync(kbPathStartup);
 }
 
+try {
+  const jsonData = JSON.stringify(scrapedData, null, 2);
+  JSON.parse(jsonData); // Valida o JSON
+  fs.writeFileSync(outputPath, jsonData, 'utf8');
+  console.log("Base de conhecimento atualizada com sucesso!");
+} catch (err) {
+  console.error("Erro ao salvar ou validar o arquivo knowledgeBase.json:", err.message);
+}
+
 // Agenda a tarefa para atualizar a base de conhecimento diariamente às 03:00 UTC
 cron.schedule(
   '0 3 * * *',
