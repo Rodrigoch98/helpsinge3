@@ -5,38 +5,59 @@ const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middlewares
+// Middlewares para tratamento de JSON e dados enviados via formulário
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Garante que a pasta "public" exista
+// Define a pasta "public"
 const publicDir = path.join(__dirname, 'public');
+
+// Cria a pasta "public" se ela não existir
 if (!fs.existsSync(publicDir)) {
   fs.mkdirSync(publicDir, { recursive: true });
 }
 
-// Rota personalizada para o arquivo knowledgeBase.json
-app.get('/knowledgeBase.json', (req, res) => {
-  const kbPath = path.join(publicDir, 'knowledgeBase.json');
-  try {
-    // Verifica se o arquivo existe e se não está vazio
-    const stat = fs.statSync(kbPath);
-    if (stat.size > 0) {
-      res.sendFile(kbPath);
-    } else {
-      // Se o arquivo estiver vazio, retorna um array vazio
-      res.json([]);
+// Caminho para o arquivo knowledgeBase.json
+const kbPath = path.join(publicDir, 'knowledgeBase.json');
+
+// Verifica se o arquivo existe; se não existir ou estiver vazio, cria-o com um array vazio (JSON válido)
+try {
+  if (!fs.existsSync(kbPath)) {
+    console.warn("Arquivo knowledgeBase.json não encontrado. Criando o arquivo com conteúdo vazio.");
+    fs.writeFileSync(kbPath, '[]', 'utf8');
+  } else {
+    const data = fs.readFileSync(kbPath, 'utf8');
+    if (!data || data.trim() === '') {
+      console.warn("Arquivo knowledgeBase.json está vazio. Preenchendo com um array vazio.");
+      fs.writeFileSync(kbPath, '[]', 'utf8');
     }
+  }
+} catch (err) {
+  console.error("Erro ao verificar/criar o arquivo knowledgeBase.json:", err.message);
+}
+
+// Rota para servir o arquivo knowledgeBase.json
+app.get('/knowledgeBase.json', (req, res) => {
+  try {
+    const data = fs.readFileSync(kbPath, 'utf8');
+    // Caso o conteúdo seja vazio, retorna um array vazio
+    if (!data || data.trim() === '') {
+      return res.json([]);
+    }
+    // Valida se o JSON é válido
+    JSON.parse(data);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(data);
   } catch (err) {
-    // Se o arquivo não existir, retorna um array vazio
-    res.json([]);
+    console.error("Erro ao carregar o arquivo knowledgeBase.json:", err.message);
+    res.status(200).json([]);
   }
 });
 
-// Serve os arquivos estáticos da pasta "public"
+// Serve arquivos estáticos da pasta "public"
 app.use(express.static(publicDir));
 
-// Routers (mantendo os roteadores existentes)
+// Rotas adicionais (mantenha as rotas dos outros módulos conforme necessário)
 const scrapingRouter = require('./api/scraping');
 const chatbotRouter = require('./api/chatbot');
 app.use('/api/scraping', scrapingRouter);
