@@ -5,13 +5,18 @@ const path = require('path');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-// Carrega a base de conhecimento do arquivo JSON (certifique-se de que o arquivo knowledgeBase.json está na pasta src)
+// Carrega a base de conhecimento do arquivo JSON
+// Atenção: verifique que o arquivo knowledgeBase.json está na pasta "public" (raiz do projeto)
 const knowledgeBasePath = path.join(__dirname, '../public', 'knowledgeBase.json');
 let knowledgeBase = [];
 try {
-  const data = fs.readFileSync(knowledgeBasePath, 'utf8');
-  knowledgeBase = JSON.parse(data);
-  console.log('Base de conhecimento carregada com sucesso.');
+  if (fs.existsSync(knowledgeBasePath)) {
+    const data = fs.readFileSync(knowledgeBasePath, 'utf8');
+    knowledgeBase = JSON.parse(data);
+    console.log('Base de conhecimento carregada com sucesso.');
+  } else {
+    console.error('Arquivo knowledgeBase.json não encontrado em:', knowledgeBasePath);
+  }
 } catch (err) {
   console.error('Erro ao carregar a base de conhecimento:', err);
 }
@@ -66,7 +71,7 @@ router.get('/', async (req, res) => {
     // Calcula a similaridade entre a pergunta e o texto obtido do link
     const fetchedSim = jaccardSimilarity(question, fetchedText);
     
-    // Define a resposta final com base na similaridade: usa o texto atualizado se for melhor, caso contrário usa o conteúdo pré-scrapeado
+    // Define a resposta final: utiliza o texto atualizado se a similaridade for maior
     const finalAnswer = (fetchedSim > bestScore) ? fetchedText : bestMatch.content;
     
     return res.json({
@@ -76,7 +81,7 @@ router.get('/', async (req, res) => {
     });
     
   } catch (err) {
-    // Em caso de erro ao acessar o link, retorna o conteúdo pré-scrapeado com um aviso
+    // Em caso de erro ao acessar o link, retorna o conteúdo pré-scrape com um aviso
     return res.json({
       answer: bestMatch.content,
       title: bestMatch.title,
