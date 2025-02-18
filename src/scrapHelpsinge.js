@@ -3173,8 +3173,13 @@ async function updateKnowledgeBase() {
     const data = await scrapeLink(entry);
     scrapedData.push(data);
   }
+  // Garante que a pasta "public" exista
+  const publicDir = path.join(__dirname, '..', 'public');
+  if (!fs.existsSync(publicDir)) {
+    fs.mkdirSync(publicDir, { recursive: true });
+  }
   // Salva o arquivo na pasta "public"
-  const outputPath = path.join(__dirname, '..', 'public', 'knowledgeBase.json');
+  const outputPath = path.join(publicDir, 'knowledgeBase.json');
   fs.writeFileSync(outputPath, JSON.stringify(scrapedData, null, 2), 'utf8');
   console.log("Base de conhecimento atualizada com sucesso!");
 }
