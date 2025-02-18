@@ -28,10 +28,9 @@ cron.schedule('0 3 * * *', () => {
   timezone: "UTC"
 });
 
-// Atualiza a base de conhecimento antes de iniciar o servidor (se não existir)
+// Se o arquivo knowledgeBase.json não existir, gera-o
 const fs = require('fs');
 const kbPath = path.join(__dirname, 'src', 'knowledgeBase.json');
-
 if (!fs.existsSync(kbPath)) {
   console.log("Arquivo knowledgeBase.json não encontrado. Gerando-o agora...");
   updateKnowledgeBase();
