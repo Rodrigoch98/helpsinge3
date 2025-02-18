@@ -17,7 +17,7 @@ if (!fs.existsSync(publicDir)) {
   fs.mkdirSync(publicDir, { recursive: true });
 }
 
-// Função auxiliar para verificar se uma string é JSON válido
+// Função para verificar se uma string é JSON válido
 function isValidJson(str) {
   try {
     JSON.parse(str);
@@ -32,7 +32,7 @@ const scrapingRouter = require('./api/scraping');
 const chatbotRouter = require('./api/chatbot');
 const { updateKnowledgeBase } = require('./src/scrapHelpsinge');
 
-// Rota para o arquivo knowledgeBase.json
+// Rota para servir o arquivo knowledgeBase.json
 app.get('/knowledgeBase.json', async (req, res) => {
   const kbPath = path.join(publicDir, 'knowledgeBase.json');
   try {
@@ -41,10 +41,10 @@ app.get('/knowledgeBase.json', async (req, res) => {
       console.log("Arquivo knowledgeBase.json não encontrado. Gerando um novo...");
       await updateKnowledgeBase();
     } else {
-      // Lê o arquivo e verifica se o JSON é válido
+      // Lê o arquivo e verifica se o conteúdo é JSON válido
       const data = fs.readFileSync(kbPath, 'utf8');
       if (!isValidJson(data)) {
-        console.warn("JSON inválido detectado em knowledgeBase.json. Regenerando...");
+        console.warn("Conteúdo inválido detectado em knowledgeBase.json. Regenerando...");
         await updateKnowledgeBase();
       }
     }
@@ -63,7 +63,7 @@ app.use(express.static(publicDir));
 app.use('/api/scraping', scrapingRouter);
 app.use('/api/chatbot', chatbotRouter);
 
-// No startup, verifica se o arquivo knowledgeBase.json é válido; se não for, remove-o para forçar a regeneração
+// No startup, se o arquivo existir mas o conteúdo não for um JSON válido, remove-o para forçar a regeneração
 const kbPathStartup = path.join(publicDir, 'knowledgeBase.json');
 try {
   if (fs.existsSync(kbPathStartup)) {
@@ -71,7 +71,7 @@ try {
     JSON.parse(data);
   }
 } catch (error) {
-  console.warn("No startup, o arquivo knowledgeBase.json é inválido. Removendo o arquivo para forçar a regeneração.");
+  console.warn("No startup, o arquivo knowledgeBase.json é inválido. Removendo para regenerar...");
   if (fs.existsSync(kbPathStartup)) fs.unlinkSync(kbPathStartup);
 }
 
