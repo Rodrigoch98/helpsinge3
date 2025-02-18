@@ -3148,11 +3148,11 @@ async function scrapeLink(entry) {
     }
     const html = response.data;
     const $ = cheerio.load(html);
-    // Remove elementos que não queremos
     $('script, style, nav, footer, header').remove();
     // Seleciona o conteúdo principal
     const mainContent = $('main, article, .content').first();
     const text = mainContent.length ? mainContent.text() : $.text();
+    console.log(`Scraping concluído para: ${entry.url}`);
     return {
       id: entry.id,
       title: entry.title,
