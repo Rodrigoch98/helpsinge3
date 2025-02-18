@@ -3763,7 +3763,9 @@
   }
 ]
 
-  // Inicializa a base de conhecimento e o índice Lunr.js
+    /**********************
+     * Inicialização do Lunr.js com a base local
+     **********************/
     window.knowledgeBase = knowledgeBase;
     window.lunrIndex = lunr(function() {
       this.ref('id');
@@ -3774,6 +3776,27 @@
       }, this);
     });
 
+    /**********************
+     * Funções de Formatação e Refinamento
+     **********************/
+    // Função que "refina" o texto: remove espaços duplicados, corrige quebras e pontuações.
+    function formatResponse(text) {
+      // Remove espaços duplicados
+      let formatted = text.replace(/\s+/g, ' ');
+      // Corrige quebras de linha e remove caracteres estranhos, se houver
+      formatted = formatted.replace(/([,.!?])\1+/g, '$1');
+      return formatted.trim();
+    }
+
+    // Função para extrair um resumo a partir de um conteúdo completo (utilizando os dois primeiros períodos)
+    function extractSummary(content, numSentences = 2) {
+      const sentences = content.split(/(?<=[.!?])\s+/);
+      return sentences.slice(0, numSentences).join(' ');
+    }
+
+    /**********************
+     * Funções do Chatbot
+     **********************/
     // Função para adicionar mensagens ao chat
     function addMessage(content, sender = 'bot') {
       const chatBody = document.getElementById('chat-messages');
@@ -3832,20 +3855,25 @@
       }
     }
 
-    // Função para gerar resposta dinâmica de forma resumida e embasada
+    // Função para gerar resposta dinâmica, refinando a resposta diversas vezes antes de retornar
     async function getDynamicResponse(query) {
       // Realiza a busca usando Lunr.js
       const results = window.lunrIndex.search(query);
       if (results.length > 0) {
-        // Seleciona o melhor resultado
         const bestResultRef = results[0].ref;
         const doc = window.knowledgeBase.find(item => item.id === bestResultRef);
         if (doc) {
-          // Extrai os dois primeiros períodos para criar um resumo breve
-          const sentences = doc.content.split(/[.!?]\s+/);
-          let summary = sentences.slice(0, 2).join('. ') + '.';
-          // Monta a resposta com o resumo e o hyperlink para o conteúdo completo
-          return summary + ' <br><a href="' + doc.url + '" target="_blank"><strong>' + doc.title + '</strong></a>';
+          // Extrai um resumo inicial com base no conteúdo do registro
+          let rawSummary = extractSummary(doc.content, 2);
+          // Aplica um loop de refinamento para "revisar" o resumo várias vezes
+          let refinedSummary = rawSummary;
+          for (let i = 0; i < 10; i++) {
+            refinedSummary = formatResponse(refinedSummary);
+          }
+          // Cria a resposta final utilizando uma frase de transição e um link formatado
+          let finalResponse = "<p><strong>Pelo que entendi:</strong> " + refinedSummary + "</p>";
+          finalResponse += "<p>Para mais detalhes, consulte a página: <a href='" + doc.url + "' target='_blank'><strong>" + doc.title + "</strong></a></p>";
+          return finalResponse;
         }
       }
       return "Desculpe, ocorreu um erro ao carregar a base de conhecimento.";
