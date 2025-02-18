@@ -56,6 +56,22 @@ router.get('/', (req, res) => {
     title: bestMatch.title,
     similarity: bestScore
   });
+  
+// Remove elementos indesejados e extrai o conteúdo principal
+$('script, style, nav, footer, header').remove();
+const mainContent = $('main, article, .content').first();
+const fetchedText = mainContent.length ? mainContent.text().trim() : $.text().trim();
+
+// Calcula a similaridade entre a pergunta e o texto obtido do link
+const fetchedSim = jaccardSimilarity(question, fetchedText);
+
+// Se a similaridade do texto obtido for maior que a do conteúdo pré-scrapeado, utiliza-o; caso contrário, utiliza o conteúdo armazenado
+const finalAnswer = (fetchedSim > bestScore) ? fetchedText : bestMatch.content;
+
+res.json({
+  answer: finalAnswer,
+  title: bestMatch.title,
+  similarity: Math.max(bestScore, fetchedSim)
 });
 
 module.exports = router;
