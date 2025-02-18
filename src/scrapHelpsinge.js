@@ -10,7 +10,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 // Array de objetos com os links a serem processados:
-const knowledgeBase = [
+const knowledgeEntries = [
       {
         "id": "apresentacao",
         "title": "Apresentação",
@@ -3169,7 +3169,7 @@ async function scrapeLink(entry) {
 async function updateKnowledgeBase() {
   console.log("Iniciando atualização da base de conhecimento...");
   const scrapedData = [];
-  for (const entry of knowledgeBase) {
+  for (const entry of knowledgeEntries) {
     const data = await scrapeLink(entry);
     scrapedData.push(data);
   }
