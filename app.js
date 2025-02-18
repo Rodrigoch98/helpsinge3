@@ -25,6 +25,18 @@ const chatbotRouter = require('./api/chatbot');
 app.use('/api/scraping', scrapingRouter);
 app.use('/api/chatbot', chatbotRouter);
 
+// Se o arquivo existir mas não for um JSON válido, apaga-o e força a atualização
+const kbPath = path.join(publicDir, 'knowledgeBase.json');
+try {
+  const data = fs.readFileSync(kbPath, 'utf8');
+  JSON.parse(data); // Tenta fazer parse para confirmar que é JSON
+} catch (error) {
+  console.warn("Arquivo knowledgeBase.json inválido. Apagando e regenerando...");
+  if (fs.existsSync(kbPath)) {
+    fs.unlinkSync(kbPath);
+  }
+}
+
 // Importa a função de atualização do scraper
 const { updateKnowledgeBase } = require('./src/scrapHelpsinge');
 
