@@ -3142,6 +3142,10 @@ const knowledgeEntries = [
 async function scrapeLink(entry) {
   try {
     const response = await axios.get(entry.url);
+    // Se a resposta não for HTML, lance um erro
+    if (!response.headers['content-type'].includes('text/html')) {
+      throw new Error('Resposta inesperada: não é HTML');
+    }
     const html = response.data;
     const $ = cheerio.load(html);
     // Remove elementos que não queremos
@@ -3156,7 +3160,7 @@ async function scrapeLink(entry) {
       content: text.trim()
     };
   } catch (error) {
-    console.error(`Erro ao processar ${entry.url}:`, error);
+    console.error(`Erro ao processar ${entry.url}:`, error.message);
     return {
       id: entry.id,
       title: entry.title,
