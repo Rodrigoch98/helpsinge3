@@ -3142,13 +3142,13 @@ const knowledgeEntries = [
 async function scrapeLink(entry) {
   try {
     const response = await axios.get(entry.url);
-    // Se a resposta não for HTML, lance um erro
-    if (!response.headers['content-type'].includes('text/html')) {
+    // Verifica se o content-type indica HTML
+    if (!response.headers['content-type'] || !response.headers['content-type'].includes('text/html')) {
       throw new Error('Resposta inesperada: não é HTML');
     }
     const html = response.data;
     const $ = cheerio.load(html);
-    // Remove elementos que não queremos
+    // Remove elementos desnecessários
     $('script, style, nav, footer, header').remove();
     // Seleciona o conteúdo principal (ajuste os seletores conforme necessário)
     const mainContent = $('main, article, .content').first();
@@ -3173,19 +3173,19 @@ async function scrapeLink(entry) {
 async function updateKnowledgeBase() {
   console.log("Iniciando atualização da base de conhecimento...");
   const scrapedData = [];
+  // Processa as entradas de forma sequencial (pode ser paralelizado se necessário)
   for (const entry of knowledgeEntries) {
     const data = await scrapeLink(entry);
     scrapedData.push(data);
   }
-  // Garante que a pasta "public" exista
-  const publicDir = path.join(__dirname, '..', 'public');
-  if (!fs.existsSync(publicDir)) {
-    fs.mkdirSync(publicDir, { recursive: true });
-  }
   // Salva o arquivo na pasta "public"
-  const outputPath = path.join(publicDir, 'knowledgeBase.json');
-  fs.writeFileSync(outputPath, JSON.stringify(scrapedData, null, 2), 'utf8');
-  console.log("Base de conhecimento atualizada com sucesso!");
+  const outputPath = path.join(__dirname, '..', 'public', 'knowledgeBase.json');
+  try {
+    fs.writeFileSync(outputPath, JSON.stringify(scrapedData, null, 2), 'utf8');
+    console.log("Base de conhecimento atualizada com sucesso!");
+  } catch (err) {
+    console.error("Erro ao salvar o arquivo knowledgeBase.json:", err.message);
+  }
 }
 
 module.exports = { updateKnowledgeBase };
