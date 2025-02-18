@@ -3142,14 +3142,12 @@ const knowledgeEntries = [
 async function scrapeLink(entry) {
   try {
     const response = await axios.get(entry.url);
-    // Verifica se a resposta é HTML
     if (!response.headers['content-type'] || !response.headers['content-type'].includes('text/html')) {
       throw new Error('Resposta inesperada: não é HTML');
     }
     const html = response.data;
     const $ = cheerio.load(html);
     $('script, style, nav, footer, header').remove();
-    // Seleciona o conteúdo principal
     const mainContent = $('main, article, .content').first();
     const text = mainContent.length ? mainContent.text() : $.text();
     console.log(`Scraping concluído para: ${entry.url}`);
@@ -3177,11 +3175,13 @@ async function updateKnowledgeBase() {
     const data = await scrapeLink(entry);
     scrapedData.push(data);
   }
-  // Salva o arquivo na pasta "public"
+  
+  // Caminho para salvar o arquivo (certifique-se de que este caminho esteja correto)
   const outputPath = path.join(__dirname, '..', 'public', 'knowledgeBase.json');
+  console.log("Salvando o arquivo em:", outputPath);
   try {
     const jsonData = JSON.stringify(scrapedData, null, 2);
-    // Testa se o JSON é válido antes de salvar
+    // Valida o JSON
     JSON.parse(jsonData);
     fs.writeFileSync(outputPath, jsonData, 'utf8');
     console.log("Base de conhecimento atualizada com sucesso!");
