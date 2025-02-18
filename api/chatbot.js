@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios');
+const cheerio = require('cheerio');
 
-// Carrega a base de conhecimento do arquivo JSON (assegure-se de que o arquivo exista na pasta src)
+// Carrega a base de conhecimento do arquivo JSON (certifique-se de que o arquivo knowledgeBase.json está na pasta src)
 const knowledgeBasePath = path.join(process.cwd(), 'src', 'knowledgeBase.json');
 let knowledgeBase = [];
 try {
@@ -24,7 +26,7 @@ function jaccardSimilarity(text1, text2) {
 }
 
 // GET /api/chatbot?question=...
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   const question = req.query.question;
   if (!question) {
     return res.status(400).json({ error: 'A pergunta (question) é obrigatória na query string.' });
@@ -45,33 +47,43 @@ router.get('/', (req, res) => {
     }
   }
   
-  // Se a similaridade for baixa, pode retornar uma mensagem padrão
+  // Se a similaridade for baixa, retorna mensagem padrão
   if (!bestMatch || bestScore < 0.1) {
     return res.json({ answer: "Desculpe, não encontrei uma resposta para a sua pergunta." });
   }
   
-  // Retorna a resposta encontrada (pode customizar o que é retornado)
-  res.json({
-    answer: bestMatch.content,
-    title: bestMatch.title,
-    similarity: bestScore
-  });
-  
-// Remove elementos indesejados e extrai o conteúdo principal
-$('script, style, nav, footer, header').remove();
-const mainContent = $('main, article, .content').first();
-const fetchedText = mainContent.length ? mainContent.text().trim() : $.text().trim();
-
-// Calcula a similaridade entre a pergunta e o texto obtido do link
-const fetchedSim = jaccardSimilarity(question, fetchedText);
-
-// Se a similaridade do texto obtido for maior que a do conteúdo pré-scrapeado, utiliza-o; caso contrário, utiliza o conteúdo armazenado
-const finalAnswer = (fetchedSim > bestScore) ? fetchedText : bestMatch.content;
-
-res.json({
-  answer: finalAnswer,
-  title: bestMatch.title,
-  similarity: Math.max(bestScore, fetchedSim)
+  // Tenta obter o conteúdo atualizado diretamente do link associado ao bestMatch
+  try {
+    const response = await axios.get(bestMatch.url);
+    const html = response.data;
+    const $ = cheerio.load(html);
+    
+    // Remove elementos indesejados e extrai o conteúdo principal
+    $('script, style, nav, footer, header').remove();
+    const mainContent = $('main, article, .content').first();
+    const fetchedText = mainContent.length ? mainContent.text().trim() : $.text().trim();
+    
+    // Calcula a similaridade entre a pergunta e o texto obtido do link
+    const fetchedSim = jaccardSimilarity(question, fetchedText);
+    
+    // Define a resposta final com base na similaridade: usa o texto atualizado se for melhor, caso contrário usa o conteúdo pré-scrapeado
+    const finalAnswer = (fetchedSim > bestScore) ? fetchedText : bestMatch.content;
+    
+    return res.json({
+      answer: finalAnswer,
+      title: bestMatch.title,
+      similarity: Math.max(bestScore, fetchedSim)
+    });
+    
+  } catch (err) {
+    // Em caso de erro ao acessar o link, retorna o conteúdo pré-scrapeado com um aviso
+    return res.json({
+      answer: bestMatch.content,
+      title: bestMatch.title,
+      similarity: bestScore,
+      warning: "Erro ao acessar o link, resposta baseada no conteúdo pré-scrape."
+    });
+  }
 });
 
 module.exports = router;
