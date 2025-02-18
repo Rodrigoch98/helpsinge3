@@ -6,7 +6,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 // Carrega a base de conhecimento do arquivo JSON (certifique-se de que o arquivo knowledgeBase.json está na pasta src)
-const knowledgeBasePath = path.join(__dirname, '../src', 'knowledgeBase.json');
+const knowledgeBasePath = path.join(__dirname, '../public', 'knowledgeBase.json');
 let knowledgeBase = [];
 try {
   const data = fs.readFileSync(knowledgeBasePath, 'utf8');
