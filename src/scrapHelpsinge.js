@@ -3142,15 +3142,15 @@ const knowledgeEntries = [
 async function scrapeLink(entry) {
   try {
     const response = await axios.get(entry.url);
-    // Verifica se o content-type indica HTML
+    // Verifica se a resposta é HTML
     if (!response.headers['content-type'] || !response.headers['content-type'].includes('text/html')) {
       throw new Error('Resposta inesperada: não é HTML');
     }
     const html = response.data;
     const $ = cheerio.load(html);
-    // Remove elementos desnecessários
+    // Remove elementos que não queremos
     $('script, style, nav, footer, header').remove();
-    // Seleciona o conteúdo principal (ajuste os seletores conforme necessário)
+    // Seleciona o conteúdo principal
     const mainContent = $('main, article, .content').first();
     const text = mainContent.length ? mainContent.text() : $.text();
     return {
@@ -3173,7 +3173,6 @@ async function scrapeLink(entry) {
 async function updateKnowledgeBase() {
   console.log("Iniciando atualização da base de conhecimento...");
   const scrapedData = [];
-  // Processa as entradas de forma sequencial (pode ser paralelizado se necessário)
   for (const entry of knowledgeEntries) {
     const data = await scrapeLink(entry);
     scrapedData.push(data);
@@ -3181,10 +3180,13 @@ async function updateKnowledgeBase() {
   // Salva o arquivo na pasta "public"
   const outputPath = path.join(__dirname, '..', 'public', 'knowledgeBase.json');
   try {
-    fs.writeFileSync(outputPath, JSON.stringify(scrapedData, null, 2), 'utf8');
+    const jsonData = JSON.stringify(scrapedData, null, 2);
+    // Testa se o JSON é válido antes de salvar
+    JSON.parse(jsonData);
+    fs.writeFileSync(outputPath, jsonData, 'utf8');
     console.log("Base de conhecimento atualizada com sucesso!");
   } catch (err) {
-    console.error("Erro ao salvar o arquivo knowledgeBase.json:", err.message);
+    console.error("Erro ao salvar ou validar o arquivo knowledgeBase.json:", err.message);
   }
 }
 
