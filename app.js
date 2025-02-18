@@ -1,3 +1,4 @@
+// server.js
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -16,20 +17,20 @@ if (!fs.existsSync(publicDir)) {
   fs.mkdirSync(publicDir, { recursive: true });
 }
 
-// Rota personalizada para o arquivo knowledgeBase.json
+// Rota para o arquivo knowledgeBase.json
 app.get('/knowledgeBase.json', (req, res) => {
   const kbPath = path.join(publicDir, 'knowledgeBase.json');
   if (fs.existsSync(kbPath)) {
     res.sendFile(kbPath);
   } else {
-    res.status(404).json({ error: 'knowledgeBase.json não encontrado' });
+    res.json([]); // Retorna um array vazio se o arquivo não existir
   }
 });
 
 // Serve os arquivos estáticos da pasta "public"
 app.use(express.static(publicDir));
 
-// Routers (exemplo – verifique se os arquivos existem)
+// Importa as rotas (exemplo)
 const scrapingRouter = require('./api/scraping');
 const chatbotRouter = require('./api/chatbot');
 app.use('/api/scraping', scrapingRouter);
@@ -38,19 +39,19 @@ app.use('/api/chatbot', chatbotRouter);
 // Importa a função de atualização do scraper
 const { updateKnowledgeBase } = require('./src/scrapHelpsinge');
 
-// Verifica se o arquivo knowledgeBase.json é válido, senão remove-o
+// Caminho para o arquivo knowledgeBase.json
 const kbPath = path.join(publicDir, 'knowledgeBase.json');
+
+// Verifica se o arquivo é um JSON válido; se não, remove-o
 try {
-  if (fs.existsSync(kbPath)) {
-    const data = fs.readFileSync(kbPath, 'utf8');
-    JSON.parse(data);
-  }
+  const data = fs.readFileSync(kbPath, 'utf8');
+  JSON.parse(data);
 } catch (error) {
-  console.warn("Arquivo knowledgeBase.json inválido. Removendo e regenerando...");
-  fs.unlinkSync(kbPath);
+  console.warn("Arquivo knowledgeBase.json inválido ou inexistente. Removendo e regenerando...");
+  if (fs.existsSync(kbPath)) fs.unlinkSync(kbPath);
 }
 
-// Agenda a tarefa para atualizar a base de conhecimento diariamente às 03:00 UTC
+// Agenda a tarefa para atualizar a base diariamente às 03:00 UTC
 cron.schedule('0 3 * * *', () => {
   console.log("Executando tarefa agendada: Atualizando base de conhecimento.");
   updateKnowledgeBase();
@@ -59,7 +60,7 @@ cron.schedule('0 3 * * *', () => {
   timezone: "UTC"
 });
 
-// Atualiza a base de conhecimento no startup
+// Atualiza a base no startup
 console.log("Atualizando a base de conhecimento no startup...");
 updateKnowledgeBase();
 
